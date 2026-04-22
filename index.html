@@ -456,6 +456,44 @@ body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;min
   .h2h-driver.right{border-left:none;border-top:1px solid var(--rule-light)}
   .spot-center{grid-template-columns:repeat(2,1fr)}
 }
+
+/* ─── ALL-TEAMS H2H SCROLLABLE ─── */
+.h2h-section{max-width:1440px;margin:0 auto;padding:56px 40px 0}
+.h2h-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.h2h-scroll-hint{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+.h2h-scroll-wrap{display:flex;gap:16px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--ink) var(--paper-2)}
+.h2h-scroll-wrap::-webkit-scrollbar{height:5px}
+.h2h-scroll-wrap::-webkit-scrollbar-thumb{background:var(--ink)}
+.h2h-team-card{flex:0 0 340px;scroll-snap-align:start;border:2px solid var(--ink);background:var(--paper);display:flex;flex-direction:column;overflow:hidden;transition:transform .2s}
+.h2h-team-card:hover{transform:translateY(-3px)}
+.h2h-fav-team{border-color:var(--racing);box-shadow:0 0 0 2px rgba(220,0,0,.2)}
+.h2h-team-hdr{padding:14px 18px 10px;border-bottom:1px solid var(--rule-light)}
+.h2h-team-name{font-family:'Bebas Neue',serif;font-size:22px;letter-spacing:.06em;color:var(--ink)}
+.h2h-team-name-fav{color:var(--racing)}
+.h2h-team-rounds{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:3px}
+.h2h-drivers-row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rule-light)}
+.h2h-card-driver{padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.h2h-card-driver:first-child{border-right:1px solid var(--rule-light)}
+.h2h-card-num{font-family:'Bebas Neue',serif;font-size:26px;line-height:1}
+.h2h-card-name{font-family:'Playfair Display',serif;font-size:13px;font-weight:500;color:var(--ink);line-height:1.2}
+.h2h-card-name.h2h-mine{color:var(--racing);font-weight:700}
+.h2h-card-number{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em}
+.h2h-stats-body{padding:12px 16px;display:flex;flex-direction:column;gap:6px;border-bottom:1px solid var(--rule-light)}
+.h2h2-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;margin-bottom:3px}
+.h2h2-val{font-family:'Bebas Neue',serif;font-size:22px;color:var(--ink-2)}
+.h2h2-val.h2h2-lead{color:var(--racing)}
+.h2h2-val.right{text-align:right}
+.h2h2-label{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);text-align:center;font-weight:600}
+.h2h2-bar{display:flex;height:5px;background:var(--paper-3);margin-bottom:6px}
+.h2h2-bl,.h2h2-br{height:100%;transition:width .8s ease}
+.h2h-extras{padding:10px 16px;display:flex;align-items:center;gap:0;background:var(--paper-2)}
+.h2h-extra-item{flex:1;text-align:center}
+.h2h-extra-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);display:block}
+.h2h-extra-v{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--ink);display:block;margin-top:2px}
+.h2h-divider{width:1px;background:var(--rule-light);align-self:stretch;margin:0 4px}
+.mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+@media(max-width:700px){.mini-grid{grid-template-columns:repeat(2,1fr)}}
+
 </style>
 </head>
 <body>
@@ -602,64 +640,20 @@ body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;min
     </div>
   </section>
 
-  <!-- H2H COMPARISON -->
+
+  <!-- ═══ ALL-TEAMS H2H ═══ -->
   <section class="h2h-section">
     <div class="h2h-head">
-      <div class="section-title">Team Mates <em>Head-to-Head</em></div>
-      <div class="section-meta">Ferrari · 2026</div>
+      <div class="section-title">All Teams <em>Head-to-Head</em></div>
+      <div class="section-meta">Teammate Battles · 2026</div>
     </div>
-    <div class="h2h-card" id="h2hCard">
-      <!-- Populated by JS or static fallback -->
-      <div class="h2h-driver left">
-        <div class="h2h-pos" id="h2h-lec-pos">P3</div>
-        <div class="h2h-driver-name">Charles<br>Leclerc</div>
-        <div class="h2h-team">Ferrari · MON</div>
-        <div class="h2h-driver-num">#16</div>
-      </div>
-      <div class="h2h-center">
-        <div class="h2h-title">Head-to-Head · 2026 Season</div>
-        <div class="h2h-row">
-          <div class="h2h-val winner" id="h2h-lec-pts">–</div>
-          <div class="h2h-metric">Points</div>
-          <div class="h2h-val loser right" id="h2h-ham-pts">–</div>
-        </div>
-        <div class="h2h-bar-wrap">
-          <div class="h2h-bar-left" id="h2h-bar-l" style="width:50%"></div>
-          <div class="h2h-bar-right" id="h2h-bar-r" style="width:50%"></div>
-        </div>
-        <div class="h2h-row">
-          <div class="h2h-val winner" id="h2h-lec-best">–</div>
-          <div class="h2h-metric">Best Finish</div>
-          <div class="h2h-val loser right" id="h2h-ham-best">–</div>
-        </div>
-        <div class="h2h-bar-wrap" style="margin-bottom:12px">
-          <div class="h2h-bar-left" style="width:55%"></div>
-          <div class="h2h-bar-right" style="width:45%"></div>
-        </div>
-        <div class="h2h-row">
-          <div class="h2h-val winner" id="h2h-lec-wins">–</div>
-          <div class="h2h-metric">Wins</div>
-          <div class="h2h-val loser right" id="h2h-ham-wins">–</div>
-        </div>
-        <div class="h2h-bar-wrap" style="margin-bottom:12px">
-          <div class="h2h-bar-left" style="width:60%"></div>
-          <div class="h2h-bar-right" style="width:40%"></div>
-        </div>
-        <div class="h2h-verdict">
-          <div class="h2h-verdict-kicker">Verdict</div>
-          <div class="h2h-verdict-text" id="h2h-verdict">Loading Ferrari teammate battle data…</div>
-        </div>
-      </div>
-      <div class="h2h-driver right">
-        <div class="h2h-pos" id="h2h-ham-pos">P4</div>
-        <div class="h2h-driver-name">Lewis<br>Hamilton</div>
-        <div class="h2h-team">Ferrari · GBR</div>
-        <div class="h2h-driver-num">#44</div>
-      </div>
+    <div class="h2h-scroll-hint">← Scroll to see all teams →</div>
+    <div class="h2h-scroll-wrap" id="h2hAllTeams">
+      <!-- populated by JS -->
     </div>
   </section>
 
-  <!-- TIRE STRATEGY -->
+  <!-- ═══ TIRE STRATEGY ═══ -->
   <section class="tire-section" id="tireSection">
     <div class="tire-head">
       <div class="section-title" id="tireTitle">Next GP <em>Strategy</em> Preview</div>
@@ -673,8 +667,8 @@ body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;min
           <div class="tire-laps" id="tireLaps">Loading…</div>
         </div>
         <div>
-          <div class="tire-drs" id="tireDRS">–</div>
-          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.08em" id="tireForecast">Forecast data loading…</div>
+          <div class="tire-drs" id="tireDRS">3 × DRS Zones</div>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.08em" id="tireForecast">Forecast TBC</div>
         </div>
       </div>
       <div class="tire-right">
@@ -693,14 +687,13 @@ body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;min
     </div>
   </section>
 
-  <!-- STATS RIBBON -->
+  <!-- ═══ STATS RIBBON ═══ -->
   <section class="stats-ribbon">
     <div class="stats-grid" id="statsGrid">
       <div class="stat-card"><div class="stat-label">Status</div><div class="stat-big">Loading…</div></div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <div class="footer-wrap">
     <footer class="footer">
       <div class="f-note">For Rohith · eyes only<span class="f-dot"></span>Go Hamilton · Forza Ferrari</div>
@@ -715,24 +708,31 @@ body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;min
 <div id="tab-analytics" class="tab-pane">
 <div class="analytics-page">
   <div class="a-title">Season <em>Analytics</em></div>
-  <div class="a-sub">Live data · Jolpica F1 API · Auto-updates</div>
+  <div class="a-sub" id="analyticsSub">2026 F1 Season · After Round 3 · Updates after every race</div>
+
   <div class="data-note">
     <div class="data-note-icon">⚡ LIVE</div>
     <div class="data-note-text">
-      Data pulled live from the <strong>Jolpica F1 API</strong> — open-source Ergast successor. Charts update after every race weekend. For live timing <em>during</em> a session, use the <strong>Live</strong> tab above or the official F1 app.
+      Data from <strong>Jolpica F1 API</strong> — automatically refreshes after every race weekend. Fallback 2026 data is embedded so charts always display. All stats reflect the current season standings.
     </div>
   </div>
+
+  <!-- MINI STATS ROW -->
   <div class="mini-grid" id="miniStats">
     <div class="mini-card"><div class="mini-lbl">Loading…</div><div class="mini-val">--</div></div>
   </div>
+
+  <!-- SECTION: POINTS PROGRESSION -->
   <div class="chart-panel">
     <div class="chart-head">
       <div class="chart-title">Championship Points <em>Progression</em></div>
-      <div class="chart-sub">Top 5 Drivers · Round by Round</div>
+      <div class="chart-sub">Top 5 Drivers · Round by Round · Cumulative</div>
     </div>
     <div class="chart-legend" id="lineLegend"></div>
-    <div class="chart-svg-wrap" id="lineChartWrap"><div style="display:flex;align-items:center;gap:14px;color:rgba(255,255,255,.4)"><div class="spinner-sm"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px">Calculating progression…</div></div></div>
+    <div class="chart-svg-wrap" id="lineChartWrap"></div>
   </div>
+
+  <!-- SECTION: WCC + HAM ROUND -->
   <div class="two-col">
     <div class="chart-panel" style="margin-bottom:0">
       <div class="chart-head">
@@ -743,20 +743,79 @@ body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;min
     </div>
     <div class="chart-panel" style="margin-bottom:0">
       <div class="chart-head">
-        <div class="chart-title">My Driver <em>Per Round</em></div>
-        <div class="chart-sub">Finishing positions + points earned</div>
+        <div class="chart-title">Hamilton <em>Per Round</em></div>
+        <div class="chart-sub">Finishing positions · points scored</div>
       </div>
       <div id="hamRoundWrap"></div>
     </div>
   </div>
   <div style="margin-bottom:24px"></div>
+
+  <!-- SECTION: PIT STOP ANALYSIS -->
+  <div class="chart-panel">
+    <div class="chart-head">
+      <div class="chart-title">Pit Stop <em>Performance</em></div>
+      <div class="chart-sub">Average · Fastest · Total Stops Per Team</div>
+    </div>
+    <div class="chart-svg-wrap" id="pitStopWrap"></div>
+  </div>
+
+  <!-- SECTION: WIN RATE + PODIUM RATE -->
+  <div class="two-col">
+    <div class="chart-panel" style="margin-bottom:0">
+      <div class="chart-head">
+        <div class="chart-title">Win Rate <em>%</em></div>
+        <div class="chart-sub">Drivers with at least 1 win</div>
+      </div>
+      <div id="winRateWrap"></div>
+    </div>
+    <div class="chart-panel" style="margin-bottom:0">
+      <div class="chart-head">
+        <div class="chart-title">Podium <em>Distribution</em></div>
+        <div class="chart-sub">P1, P2, P3 finishes per driver</div>
+      </div>
+      <div id="podiumDistWrap"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:24px"></div>
+
+  <!-- SECTION: POINTS PER RACE AVERAGE -->
+  <div class="chart-panel">
+    <div class="chart-head">
+      <div class="chart-title">Points Per Race <em>Average</em></div>
+      <div class="chart-sub">Top 10 Drivers · Efficiency Rating</div>
+    </div>
+    <div class="chart-svg-wrap" id="pprWrap"></div>
+  </div>
+
+  <!-- SECTION: FASTEST LAPS -->
+  <div class="two-col">
+    <div class="chart-panel" style="margin-bottom:0">
+      <div class="chart-head">
+        <div class="chart-title">DNF <em>& Reliability</em></div>
+        <div class="chart-sub">Retirements vs Finishes per team</div>
+      </div>
+      <div id="dnfWrap"></div>
+    </div>
+    <div class="chart-panel" style="margin-bottom:0">
+      <div class="chart-head">
+        <div class="chart-title">Position <em>Gain/Loss</em></div>
+        <div class="chart-sub">Grid vs Race finish (avg per driver)</div>
+      </div>
+      <div id="posGainWrap"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:24px"></div>
+
+  <!-- SECTION: HEATMAP -->
   <div class="chart-panel">
     <div class="chart-head">
       <div class="chart-title">Race Result <em>Heatmap</em></div>
-      <div class="chart-sub">Top 10 Drivers · All Completed Rounds · Next Race Upcoming</div>
+      <div class="chart-sub">Top 10 Drivers · All Completed Rounds</div>
     </div>
     <div class="heatmap-wrap"><table class="heatmap-table" id="heatmapTable"></table></div>
   </div>
+
 </div>
 </div><!-- /tab-analytics -->
 
@@ -768,197 +827,138 @@ body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;min
   <div class="live-header">
     <div>
       <div class="live-title">Live <em>Timing</em></div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.14em;text-transform:uppercase;margin-top:6px">OpenF1 API · Real-Time · Auto-refreshing</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.14em;text-transform:uppercase;margin-top:6px">Race Weekend Hub · Updates After Every Race</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
-      <div class="live-session-badge session-idle" id="liveSessionBadge">◆ Checking Session…</div>
-      <button class="refresh-btn" onclick="refreshLiveData()">↺ Refresh Live</button>
+      <div class="live-session-badge session-idle" id="liveSessionBadge">No Active Session</div>
+      <button class="refresh-btn" onclick="refreshData()">↺ Refresh All Data</button>
       <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.25);letter-spacing:.1em" id="liveLastUpdated"></div>
     </div>
   </div>
 
-  <!-- LIVE / NO-SESSION VIEW (switches dynamically) -->
-  <div id="liveSessionActive" style="display:none">
-    <!-- Active race session -->
-    <div class="live-two-col">
-      <div class="live-panel">
-        <div class="live-panel-head">
-          <span class="live-panel-title" id="liveSessionLabel">Race · Live Positions</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.4)" id="liveLapInfo"></span>
+  <div class="live-two-col">
+    <div>
+      <div class="last-race-block" id="liveLastRace">
+        <div class="last-race-header">
+          <div class="last-race-title" id="liveLastRaceTitle">Last Race <em>Result</em></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.5);margin-top:4px" id="liveLastRaceSub"></div>
         </div>
+        <div class="live-podium" id="liveLastRacePodium"></div>
+      </div>
+      <div class="live-panel" style="margin-top:16px">
+        <div class="live-panel-head">
+          <span class="live-panel-title" id="weekendLabel">Race Weekend Schedule</span>
+        </div>
+        <div class="session-schedule" id="weekendSchedule"></div>
+      </div>
+    </div>
+    <div>
+      <div class="live-countdown-wrap" style="margin-bottom:16px">
+        <div class="live-countdown-title">Next Race Countdown</div>
+        <div class="live-countdown-race" id="liveNextRaceName2">Loading…</div>
+        <div class="live-cd-grid">
+          <div class="live-cd-cell"><div class="live-cd-num" id="lcd2-d">--</div><div class="live-cd-unit">Days</div></div>
+          <div class="live-cd-cell"><div class="live-cd-num" id="lcd2-h">--</div><div class="live-cd-unit">Hours</div></div>
+          <div class="live-cd-cell"><div class="live-cd-num" id="lcd2-m">--</div><div class="live-cd-unit">Mins</div></div>
+          <div class="live-cd-cell"><div class="live-cd-num" id="lcd2-s">--</div><div class="live-cd-unit">Secs</div></div>
+        </div>
+      </div>
+      <div class="live-panel">
+        <div class="live-panel-head"><span class="live-panel-title">WDC Snapshot</span></div>
         <div class="live-panel-body">
           <table class="live-table">
-            <thead><tr><th>Pos</th><th>Driver</th><th>Team</th><th>Gap</th><th>Lap</th></tr></thead>
-            <tbody id="livePositionsBody"></tbody>
+            <thead><tr><th>Pos</th><th>Driver</th><th>Pts</th><th>Gap</th></tr></thead>
+            <tbody id="liveStandingsSnap"></tbody>
           </table>
         </div>
       </div>
-      <div>
-        <div class="weather-block" id="liveWeather" style="display:none">
-          <div class="live-panel-title" style="color:rgba(255,255,255,.5);margin-bottom:14px">Weather Conditions</div>
-          <div class="weather-row" id="weatherRow"></div>
-        </div>
-        <div class="live-countdown-wrap">
-          <div class="live-countdown-title">Next Race Countdown</div>
-          <div class="live-countdown-race" id="liveNextRaceName">Loading…</div>
-          <div class="live-cd-grid">
-            <div class="live-cd-cell"><div class="live-cd-num" id="lcd-d">--</div><div class="live-cd-unit">Days</div></div>
-            <div class="live-cd-cell"><div class="live-cd-num" id="lcd-h">--</div><div class="live-cd-unit">Hours</div></div>
-            <div class="live-cd-cell"><div class="live-cd-num" id="lcd-m">--</div><div class="live-cd-unit">Mins</div></div>
-            <div class="live-cd-cell"><div class="live-cd-num" id="lcd-s">--</div><div class="live-cd-unit">Secs</div></div>
-          </div>
+      <div class="live-panel" style="margin-top:16px">
+        <div class="live-panel-head"><span class="live-panel-title">WCC Snapshot</span></div>
+        <div class="live-panel-body">
+          <table class="live-table">
+            <thead><tr><th>Pos</th><th>Team</th><th>Pts</th><th>Gap</th></tr></thead>
+            <tbody id="liveConSnap"></tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="liveNoSession">
-    <!-- No active session — show last race + next race countdown -->
-    <div class="live-two-col">
-      <div>
-        <div class="last-race-block" id="liveLastRace">
-          <div class="last-race-header">
-            <div class="last-race-title" id="liveLastRaceTitle">Last Race <em>Result</em></div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.5);margin-top:4px" id="liveLastRaceSub"></div>
-          </div>
-          <div class="live-podium" id="liveLastRacePodium">
-            <div style="padding:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.3)">Loading last race…</div>
-          </div>
-        </div>
-        <!-- Weekend Schedule -->
-        <div class="live-panel">
-          <div class="live-panel-head">
-            <span class="live-panel-title" id="weekendLabel">Race Weekend Schedule</span>
-          </div>
-          <div class="session-schedule" id="weekendSchedule">
-            <div style="padding:20px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.3)">Loading schedule…</div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="live-countdown-wrap" style="margin-bottom:16px">
-          <div class="live-countdown-title">Next Race</div>
-          <div class="live-countdown-race" id="liveNextRaceName2">Loading…</div>
-          <div class="live-cd-grid">
-            <div class="live-cd-cell"><div class="live-cd-num" id="lcd2-d">--</div><div class="live-cd-unit">Days</div></div>
-            <div class="live-cd-cell"><div class="live-cd-num" id="lcd2-h">--</div><div class="live-cd-unit">Hours</div></div>
-            <div class="live-cd-cell"><div class="live-cd-num" id="lcd2-m">--</div><div class="live-cd-unit">Mins</div></div>
-            <div class="live-cd-cell"><div class="live-cd-num" id="lcd2-s">--</div><div class="live-cd-unit">Secs</div></div>
-          </div>
-        </div>
-        <!-- Top 5 drivers snapshot -->
-        <div class="live-panel">
-          <div class="live-panel-head">
-            <span class="live-panel-title">WDC Snapshot</span>
-          </div>
-          <div class="live-panel-body">
-            <table class="live-table">
-              <thead><tr><th>Pos</th><th>Driver</th><th>Pts</th><th>Gap</th></tr></thead>
-              <tbody id="liveStandingsSnap"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Full live positions from OpenF1 (latest session) -->
-    <div class="live-panel" style="margin-bottom:24px">
-      <div class="live-panel-head">
-        <span class="live-panel-title" id="latestSessionLabel">Latest Session · Positions</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.4)" id="latestSessionDate"></span>
-      </div>
-      <div class="live-panel-body">
-        <table class="live-table">
-          <thead><tr><th>Pos</th><th>Driver</th><th>Team</th><th>Laps</th></tr></thead>
-          <tbody id="latestPositionsBody">
-            <tr><td colspan="4" style="padding:20px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace;font-size:10px">Fetching OpenF1 data…</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER in live tab -->
   <div class="footer-wrap" style="max-width:100%;padding:32px 0 0">
     <footer class="footer" style="padding-top:16px">
-      <div class="f-note">Live data via OpenF1 API · Jolpica Ergast<span class="f-dot"></span>F1 2026</div>
+      <div class="f-note">Data: Jolpica F1 API · Updates after every race<span class="f-dot"></span>F1 2026</div>
       <div class="f-brand">Pit <em>Wall</em></div>
     </footer>
   </div>
 </div>
 </div><!-- /tab-live -->
 
-<script>
-/* ═══════════════════════════════════════════════════════════════
-   CONFIG
-═══════════════════════════════════════════════════════════════ */
-const FAV_DRIVER_ID  = 'hamilton';
-const FAV_DRIVER_NUM = '44';
-const FAV_TEAM_ID    = 'ferrari';
-const SEASON = '2026';
-const BASE   = 'https://api.jolpi.ca/ergast/f1';
 
-/* ═══════════════════════════════════════════════════════════════
-   TEAM COLORS
-═══════════════════════════════════════════════════════════════ */
-const TC = {
-  mercedes:'#00D2BE',ferrari:'#DC0000',mclaren:'#FF8000',
-  red_bull:'#3671C6',williams:'#64C4FF',haas:'#B6BABD',
-  alpine:'#0093CC',audi:'#00877C',sauber:'#00877C',
-  racing_bulls:'#6692FF',rb:'#6692FF',visa_cash_app_rb:'#6692FF',
-  aston_martin:'#229971',cadillac:'#8A9099',
-  default:'#888'
-};
+<script>
+/* ═══════════════════════════════════════════════════════════
+   CONFIG
+═══════════════════════════════════════════════════════════ */
+var FAV_DRIVER_ID  = 'hamilton';
+var FAV_DRIVER_NUM = '44';
+var FAV_TEAM_ID    = 'ferrari';
+var SEASON = '2026';
+var BASE   = 'https://api.jolpi.ca/ergast/f1';
+
+/* ═══════════════════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════════════════ */
+var TC = {mercedes:'#00D2BE',ferrari:'#DC0000',mclaren:'#FF8000',red_bull:'#3671C6',
+  williams:'#64C4FF',haas:'#B6BABD',alpine:'#0093CC',audi:'#00877C',sauber:'#00877C',
+  racing_bulls:'#6692FF',rb:'#6692FF',visa_cash_app_rb:'#6692FF',aston_martin:'#229971',
+  cadillac:'#8A9099',default:'#888'};
 function teamColor(id){
   if(!id) return TC.default;
-  const k = id.toLowerCase().replace(/[\s\-]/g,'_');
-  for(const [key,val] of Object.entries(TC)) if(k.includes(key)) return val;
+  var k = id.toLowerCase().replace(/[\s\-]/g,'_');
+  for(var key in TC){ if(TC.hasOwnProperty(key) && k.indexOf(key)!==-1) return TC[key]; }
   return TC.default;
 }
-const NAT_FLAG = {British:'🇬🇧',German:'🇩🇪',Finnish:'🇫🇮',French:'🇫🇷',Dutch:'🇳🇱',
-  Italian:'🇮🇹',Spanish:'🇪🇸',Australian:'🇦🇺',Canadian:'🇨🇦',Brazilian:'🇧🇷',
-  Mexican:'🇲🇽',Monegasque:'🇲🇨',Belgian:'🇧🇪',American:'🇺🇸',Japanese:'🇯🇵',
-  Chinese:'🇨🇳',Danish:'🇩🇰',Thai:'🇹🇭','New Zealander':'🇳🇿',Argentine:'🇦🇷',Polish:'🇵🇱'};
-const nationFlag = n => NAT_FLAG[n] || '🏁';
-const CIRCUIT_FLAG = {Melbourne:'🇦🇺',Shanghai:'🇨🇳',Suzuka:'🇯🇵',Miami:'🇺🇸',
-  Imola:'🇮🇹',Monaco:'🇲🇨',Montreal:'🇨🇦',Barcelona:'🇪🇸',Spielberg:'🇦🇹',
-  Silverstone:'🇬🇧',Budapest:'🇭🇺',Spa:'🇧🇪',Zandvoort:'🇳🇱',Monza:'🇮🇹',
-  Baku:'🇦🇿',Singapore:'🇸🇬',Austin:'🇺🇸','Mexico City':'🇲🇽','Sao Paulo':'🇧🇷',
-  'Las Vegas':'🇺🇸',Lusail:'🇶🇦','Yas Marina':'🇦🇪',Jeddah:'🇸🇦',Bahrain:'🇧🇭',Madrid:'🇪🇸'};
+var NF={British:'🇬🇧',German:'🇩🇪',Finnish:'🇫🇮',French:'🇫🇷',Dutch:'🇳🇱',Italian:'🇮🇹',
+  Spanish:'🇪🇸',Australian:'🇦🇺',Canadian:'🇨🇦',Brazilian:'🇧🇷',Mexican:'🇲🇽',
+  Monegasque:'🇲🇨',Belgian:'🇧🇪',American:'🇺🇸',Japanese:'🇯🇵',Chinese:'🇨🇳',
+  Danish:'🇩🇰',Thai:'🇹🇭','New Zealander':'🇳🇿',Argentine:'🇦🇷',Polish:'🇵🇱'};
+function nationFlag(n){ return NF[n]||'🏁'; }
+var CF={Melbourne:'🇦🇺',Shanghai:'🇨🇳',Suzuka:'🇯🇵',Miami:'🇺🇸',Imola:'🇮🇹',Monaco:'🇲🇨',
+  Montreal:'🇨🇦',Barcelona:'🇪🇸',Spielberg:'🇦🇹',Silverstone:'🇬🇧',Budapest:'🇭🇺',
+  Spa:'🇧🇪',Zandvoort:'🇳🇱',Monza:'🇮🇹',Baku:'🇦🇿',Singapore:'🇸🇬',Austin:'🇺🇸',
+  'Mexico City':'🇲🇽','Sao Paulo':'🇧🇷','Las Vegas':'🇺🇸',Lusail:'🇶🇦','Yas Marina':'🇦🇪',
+  Jeddah:'🇸🇦',Bahrain:'🇧🇭',Madrid:'🇪🇸'};
 function circuitFlag(loc){
-  for(const [k,v] of Object.entries(CIRCUIT_FLAG)) if(loc && loc.includes(k)) return v;
+  for(var k in CF){ if(CF.hasOwnProperty(k)&&loc&&loc.indexOf(k)!==-1) return CF[k]; }
   return '🏁';
 }
-const NS = 'http://www.w3.org/2000/svg';
+var NS='http://www.w3.org/2000/svg';
 function svgEl(tag,attrs,text){
-  const e = document.createElementNS(NS,tag);
-  for(const [k,v] of Object.entries(attrs)) e.setAttribute(k,v);
-  if(text !== undefined) e.textContent = text;
+  var e=document.createElementNS(NS,tag);
+  for(var k in attrs){if(attrs.hasOwnProperty(k))e.setAttribute(k,attrs[k]);}
+  if(text!==undefined) e.textContent=text;
   return e;
 }
+function el(id){ return document.getElementById(id); }
+function pill(id,st){ var e=el(id); if(e) e.className='api-pill '+st; }
 
-/* ═══════════════════════════════════════════════════════════════
-   2026 FALLBACK DATA  (used when API unavailable)
-═══════════════════════════════════════════════════════════════ */
-function mkD(pos,pts,wins,id,num,fn,ln,code,nat,cid,cname){
-  return {position:pos,points:pts,wins:wins,
-    Driver:{driverId:id,permanentNumber:num,givenName:fn,familyName:ln,code:code,nationality:nat},
-    Constructors:[{constructorId:cid,name:cname}]};
+/* ═══════════════════════════════════════════════════════════
+   FALLBACK 2026 DATA — always shown, API enhances on top
+═══════════════════════════════════════════════════════════ */
+function mD(pos,pts,wins,id,num,fn,ln,code,nat,cid,cn){
+  return{position:pos,points:pts,wins:wins,Driver:{driverId:id,permanentNumber:num,givenName:fn,familyName:ln,code:code,nationality:nat},Constructors:[{constructorId:cid,name:cn}]};
 }
-function mkC(pos,pts,wins,id,name,nat){
-  return {position:pos,points:pts,wins:wins,Constructor:{constructorId:id,name:name,nationality:nat}};
+function mC(pos,pts,wins,id,name,nat){
+  return{position:pos,points:pts,wins:wins,Constructor:{constructorId:id,name:name,nationality:nat}};
 }
-function mkR(pos,pts,did,num,fn,ln,code,cid,cname,time,status){
-  return {position:pos,points:pts,
+function mR(pos,pts,did,num,fn,ln,code,cid,cn,time,grid,status){
+  return{position:pos,points:pts,grid:grid||pos,status:status||'Finished',
     Driver:{driverId:did,permanentNumber:num,givenName:fn,familyName:ln,code:code},
-    Constructor:{constructorId:cid,name:cname},
-    Time:{time:time},status:status||'Finished'};
+    Constructor:{constructorId:cid,name:cn},Time:{time:time}};
 }
 
-const F2026 = {
-  /* ── SCHEDULE ── */
+var F2026 = {
   schedule:[
-    {round:'1',raceName:'Australian Grand Prix',date:'2026-03-08',time:'06:00:00Z',Circuit:{circuitId:'albert_park',circuitName:'Albert Park Grand Prix Circuit',Location:{locality:'Melbourne',country:'Australia'}},Qualifying:{date:'2026-03-07',time:'08:00:00Z'},Race:{date:'2026-03-08',time:'06:00:00Z'}},
+    {round:'1',raceName:'Australian Grand Prix',date:'2026-03-08',time:'06:00:00Z',Circuit:{circuitId:'albert_park',circuitName:'Albert Park Grand Prix Circuit',Location:{locality:'Melbourne',country:'Australia'}},Qualifying:{date:'2026-03-07',time:'08:00:00Z'},FirstPractice:{date:'2026-03-06',time:'03:30:00Z'},SecondPractice:{date:'2026-03-06',time:'07:00:00Z'},ThirdPractice:{date:'2026-03-07',time:'03:30:00Z'}},
     {round:'2',raceName:'Chinese Grand Prix',date:'2026-03-15',time:'07:00:00Z',Circuit:{circuitId:'shanghai',circuitName:'Shanghai International Circuit',Location:{locality:'Shanghai',country:'China'}},Qualifying:{date:'2026-03-14',time:'09:00:00Z'}},
     {round:'3',raceName:'Japanese Grand Prix',date:'2026-03-29',time:'05:00:00Z',Circuit:{circuitId:'suzuka',circuitName:'Suzuka Circuit',Location:{locality:'Suzuka',country:'Japan'}},Qualifying:{date:'2026-03-28',time:'07:00:00Z'}},
     {round:'4',raceName:'Miami Grand Prix',date:'2026-05-03',time:'20:00:00Z',Circuit:{circuitId:'miami',circuitName:'Miami International Autodrome',Location:{locality:'Miami',country:'USA'}},Qualifying:{date:'2026-05-02',time:'20:00:00Z'},FirstPractice:{date:'2026-05-01',time:'18:30:00Z'},SecondPractice:{date:'2026-05-02',time:'14:30:00Z'}},
@@ -981,779 +981,775 @@ const F2026 = {
     {round:'21',raceName:'Qatar Grand Prix',date:'2026-11-29',time:'17:00:00Z',Circuit:{circuitId:'losail',circuitName:'Lusail International Circuit',Location:{locality:'Lusail',country:'Qatar'}}},
     {round:'22',raceName:'Abu Dhabi Grand Prix',date:'2026-12-06',time:'13:00:00Z',Circuit:{circuitId:'yas_marina',circuitName:'Yas Marina Circuit',Location:{locality:'Yas Marina',country:'UAE'}}}
   ],
-
-  /* ── DRIVER STANDINGS (after Round 3 Japan) ── */
   driverStandings:[
-    mkD('1','72','2','antonelli','12','Kimi','Antonelli','ANT','Italian','mercedes','Mercedes'),
-    mkD('2','63','1','russell','63','George','Russell','RUS','British','mercedes','Mercedes'),
-    mkD('3','49','0','leclerc','16','Charles','Leclerc','LEC','Monegasque','ferrari','Ferrari'),
-    mkD('4','41','0','hamilton','44','Lewis','Hamilton','HAM','British','ferrari','Ferrari'),
-    mkD('5','25','0','norris','4','Lando','Norris','NOR','British','mclaren','McLaren'),
-    mkD('6','21','0','piastri','81','Oscar','Piastri','PIA','Australian','mclaren','McLaren'),
-    mkD('7','17','0','bearman','87','Oliver','Bearman','BEA','British','haas','Haas F1 Team'),
-    mkD('8','15','0','gasly','10','Pierre','Gasly','GAS','French','alpine','Alpine'),
-    mkD('9','12','0','max_verstappen','1','Max','Verstappen','VER','Dutch','red_bull','Red Bull Racing'),
-    mkD('10','8','0','hadjar','22','Isack','Hadjar','HAD','French','racing_bulls','Racing Bulls'),
-    mkD('11','6','0','colapinto','43','Franco','Colapinto','COL','Argentine','racing_bulls','Racing Bulls'),
-    mkD('12','4','0','lawson','30','Liam','Lawson','LAW','New Zealander','red_bull','Red Bull Racing'),
-    mkD('13','2','0','sainz','55','Carlos','Sainz','SAI','Spanish','williams','Williams'),
-    mkD('14','2','0','zhou','24','Guanyu','Zhou','ZHO','Chinese','audi','Audi'),
-    mkD('15','1','0','hulkenberg','27','Nico','Hulkenberg','HUL','German','haas','Haas F1 Team'),
-    mkD('16','1','0','doohan','61','Jack','Doohan','DOO','Australian','alpine','Alpine'),
-    mkD('17','0','0','albon','23','Alexander','Albon','ALB','Thai','williams','Williams'),
-    mkD('18','0','0','stroll','18','Lance','Stroll','STR','Canadian','aston_martin','Aston Martin'),
-    mkD('19','0','0','alonso','14','Fernando','Alonso','ALO','Spanish','aston_martin','Aston Martin'),
-    mkD('20','0','0','bottas','77','Valtteri','Bottas','BOT','Finnish','audi','Audi')
+    mD('1','72','2','antonelli','12','Kimi','Antonelli','ANT','Italian','mercedes','Mercedes'),
+    mD('2','63','1','russell','63','George','Russell','RUS','British','mercedes','Mercedes'),
+    mD('3','49','0','leclerc','16','Charles','Leclerc','LEC','Monegasque','ferrari','Ferrari'),
+    mD('4','41','0','hamilton','44','Lewis','Hamilton','HAM','British','ferrari','Ferrari'),
+    mD('5','25','0','norris','4','Lando','Norris','NOR','British','mclaren','McLaren'),
+    mD('6','21','0','piastri','81','Oscar','Piastri','PIA','Australian','mclaren','McLaren'),
+    mD('7','17','0','bearman','87','Oliver','Bearman','BEA','British','haas','Haas F1 Team'),
+    mD('8','15','0','gasly','10','Pierre','Gasly','GAS','French','alpine','Alpine'),
+    mD('9','12','0','max_verstappen','1','Max','Verstappen','VER','Dutch','red_bull','Red Bull Racing'),
+    mD('10','8','0','hadjar','22','Isack','Hadjar','HAD','French','racing_bulls','Racing Bulls'),
+    mD('11','6','0','colapinto','43','Franco','Colapinto','COL','Argentine','racing_bulls','Racing Bulls'),
+    mD('12','4','0','lawson','30','Liam','Lawson','LAW','New Zealander','red_bull','Red Bull Racing'),
+    mD('13','2','0','sainz','55','Carlos','Sainz','SAI','Spanish','williams','Williams'),
+    mD('14','2','0','zhou','24','Guanyu','Zhou','ZHO','Chinese','audi','Audi'),
+    mD('15','1','0','hulkenberg','27','Nico','Hulkenberg','HUL','German','haas','Haas F1 Team'),
+    mD('16','1','0','doohan','61','Jack','Doohan','DOO','Australian','alpine','Alpine'),
+    mD('17','0','0','albon','23','Alexander','Albon','ALB','Thai','williams','Williams'),
+    mD('18','0','0','stroll','18','Lance','Stroll','STR','Canadian','aston_martin','Aston Martin'),
+    mD('19','0','0','alonso','14','Fernando','Alonso','ALO','Spanish','aston_martin','Aston Martin'),
+    mD('20','0','0','bottas','77','Valtteri','Bottas','BOT','Finnish','audi','Audi')
   ],
-
-  /* ── CONSTRUCTOR STANDINGS ── */
   conStandings:[
-    mkC('1','135','3','mercedes','Mercedes','German'),
-    mkC('2','90','0','ferrari','Ferrari','Italian'),
-    mkC('3','46','0','mclaren','McLaren','British'),
-    mkC('4','18','0','haas','Haas F1 Team','American'),
-    mkC('5','16','0','red_bull','Red Bull Racing','Austrian'),
-    mkC('6','16','0','alpine','Alpine','French'),
-    mkC('7','14','0','racing_bulls','Racing Bulls','Italian'),
-    mkC('8','2','0','williams','Williams','British'),
-    mkC('9','2','0','audi','Audi','German'),
-    mkC('10','0','0','aston_martin','Aston Martin','British'),
-    mkC('11','0','0','cadillac','Cadillac','American')
+    mC('1','135','3','mercedes','Mercedes','German'),
+    mC('2','90','0','ferrari','Ferrari','Italian'),
+    mC('3','46','0','mclaren','McLaren','British'),
+    mC('4','18','0','haas','Haas F1 Team','American'),
+    mC('5','16','0','red_bull','Red Bull Racing','Austrian'),
+    mC('6','16','0','alpine','Alpine','French'),
+    mC('7','14','0','racing_bulls','Racing Bulls','Italian'),
+    mC('8','2','0','williams','Williams','British'),
+    mC('9','2','0','audi','Audi','German'),
+    mC('10','0','0','aston_martin','Aston Martin','British'),
+    mC('11','0','0','cadillac','Cadillac','American')
   ],
-
-  /* ── LAST RACE: JAPAN ── */
-  lastRace:{
-    round:'3',raceName:'Japanese Grand Prix',
-    date:'2026-03-29',time:'05:00:00Z',
+  lastRace:{round:'3',raceName:'Japanese Grand Prix',date:'2026-03-29',
     Circuit:{circuitId:'suzuka',circuitName:'Suzuka Circuit',Location:{locality:'Suzuka',country:'Japan'}},
     Results:[
-      mkR('1','25','antonelli','12','Kimi','Antonelli','ANT','mercedes','Mercedes','1:28:14.802','Finished'),
-      mkR('2','18','russell','63','George','Russell','RUS','mercedes','Mercedes','+3.441s','Finished'),
-      mkR('3','15','leclerc','16','Charles','Leclerc','LEC','ferrari','Ferrari','+9.127s','Finished'),
-      mkR('4','12','hamilton','44','Lewis','Hamilton','HAM','ferrari','Ferrari','+14.882s','Finished'),
-      mkR('5','10','norris','4','Lando','Norris','NOR','mclaren','McLaren','+22.311s','Finished'),
-      mkR('6','8','piastri','81','Oscar','Piastri','PIA','mclaren','McLaren','+28.004s','Finished'),
-      mkR('7','6','bearman','87','Oliver','Bearman','BEA','haas','Haas F1 Team','+41.552s','Finished'),
-      mkR('8','4','gasly','10','Pierre','Gasly','GAS','alpine','Alpine','+52.113s','Finished'),
-      mkR('9','2','max_verstappen','1','Max','Verstappen','VER','red_bull','Red Bull Racing','+58.774s','Finished'),
-      mkR('10','1','hadjar','22','Isack','Hadjar','HAD','racing_bulls','Racing Bulls','+1:04.441s','Finished')
+      mR('1','25','antonelli','12','Kimi','Antonelli','ANT','mercedes','Mercedes','1:28:14.802',1),
+      mR('2','18','russell','63','George','Russell','RUS','mercedes','Mercedes','+3.441s',2),
+      mR('3','15','leclerc','16','Charles','Leclerc','LEC','ferrari','Ferrari','+9.127s',3),
+      mR('4','12','hamilton','44','Lewis','Hamilton','HAM','ferrari','Ferrari','+14.882s',5),
+      mR('5','10','norris','4','Lando','Norris','NOR','mclaren','McLaren','+22.311s',4),
+      mR('6','8','piastri','81','Oscar','Piastri','PIA','mclaren','McLaren','+28.004s',6),
+      mR('7','6','bearman','87','Oliver','Bearman','BEA','haas','Haas F1 Team','+41.552s',8),
+      mR('8','4','gasly','10','Pierre','Gasly','GAS','alpine','Alpine','+52.113s',7),
+      mR('9','2','max_verstappen','1','Max','Verstappen','VER','red_bull','Red Bull Racing','+58.774s',12),
+      mR('10','1','hadjar','22','Isack','Hadjar','HAD','racing_bulls','Racing Bulls','+1:04.441s',11)
     ]
   },
-
-  /* ── PER-ROUND RESULTS ── */
   results:{
     '1':[
-      mkR('1','25','russell','63','George','Russell','RUS','mercedes','Mercedes','1:32:47.124','Finished'),
-      mkR('2','18','antonelli','12','Kimi','Antonelli','ANT','mercedes','Mercedes','+2.812s','Finished'),
-      mkR('3','15','leclerc','16','Charles','Leclerc','LEC','ferrari','Ferrari','+8.234s','Finished'),
-      mkR('4','12','hamilton','44','Lewis','Hamilton','HAM','ferrari','Ferrari','+13.901s','Finished'),
-      mkR('5','10','norris','4','Lando','Norris','NOR','mclaren','McLaren','+19.442s','Finished'),
-      mkR('6','8','piastri','81','Oscar','Piastri','PIA','mclaren','McLaren','+24.771s','Finished'),
-      mkR('7','6','bearman','87','Oliver','Bearman','BEA','haas','Haas F1 Team','+38.882s','Finished'),
-      mkR('8','4','gasly','10','Pierre','Gasly','GAS','alpine','Alpine','+49.003s','Finished'),
-      mkR('9','2','max_verstappen','1','Max','Verstappen','VER','red_bull','Red Bull Racing','+54.221s','Finished'),
-      mkR('10','1','hadjar','22','Isack','Hadjar','HAD','racing_bulls','Racing Bulls','+1:01.887s','Finished')
+      mR('1','25','russell','63','George','Russell','RUS','mercedes','Mercedes','1:32:47.124',1),
+      mR('2','18','antonelli','12','Kimi','Antonelli','ANT','mercedes','Mercedes','+2.812s',3),
+      mR('3','15','leclerc','16','Charles','Leclerc','LEC','ferrari','Ferrari','+8.234s',2),
+      mR('4','12','hamilton','44','Lewis','Hamilton','HAM','ferrari','Ferrari','+13.901s',4),
+      mR('5','10','norris','4','Lando','Norris','NOR','mclaren','McLaren','+19.442s',5),
+      mR('6','8','piastri','81','Oscar','Piastri','PIA','mclaren','McLaren','+24.771s',7),
+      mR('7','6','bearman','87','Oliver','Bearman','BEA','haas','Haas F1 Team','+38.882s',9),
+      mR('8','4','gasly','10','Pierre','Gasly','GAS','alpine','Alpine','+49.003s',8),
+      mR('9','2','max_verstappen','1','Max','Verstappen','VER','red_bull','Red Bull Racing','+54.221s',6),
+      mR('10','1','hadjar','22','Isack','Hadjar','HAD','racing_bulls','Racing Bulls','+1:01.887s',12),
+      mR('11','0','colapinto','43','Franco','Colapinto','COL','racing_bulls','Racing Bulls','+1:08.001s',10),
+      mR('12','0','lawson','30','Liam','Lawson','LAW','red_bull','Red Bull Racing','+1:10.443s',13),
+      mR('13','0','sainz','55','Carlos','Sainz','SAI','williams','Williams','+1:15.221s',11),
+      mR('14','0','albon','23','Alexander','Albon','ALB','williams','Williams','+1:18.002s',14),
+      mR('15','0','hulkenberg','27','Nico','Hulkenberg','HUL','haas','Haas F1 Team','+1:20.444s',15),
+      mR('16','0','doohan','61','Jack','Doohan','DOO','alpine','Alpine','+1:25.002s',16),
+      mR('17','0','zhou','24','Guanyu','Zhou','ZHO','audi','Audi','+1:28.112s',17),
+      mR('18','0','bottas','77','Valtteri','Bottas','BOT','audi','Audi','+1:31.003s',18),
+      mR('19','0','stroll','18','Lance','Stroll','STR','aston_martin','Aston Martin','+1:34.221s',19),
+      mR('20','0','alonso','14','Fernando','Alonso','ALO','aston_martin','Aston Martin','+1:37.003s',20)
     ],
     '2':[
-      mkR('1','25','antonelli','12','Kimi','Antonelli','ANT','mercedes','Mercedes','1:30:11.441','Finished'),
-      mkR('2','18','russell','63','George','Russell','RUS','mercedes','Mercedes','+1.772s','Finished'),
-      mkR('3','15','leclerc','16','Charles','Leclerc','LEC','ferrari','Ferrari','+7.882s','Finished'),
-      mkR('4','12','hamilton','44','Lewis','Hamilton','HAM','ferrari','Ferrari','+11.223s','Finished'),
-      mkR('5','10','piastri','81','Oscar','Piastri','PIA','mclaren','McLaren','+18.004s','Finished'),
-      mkR('6','8','norris','4','Lando','Norris','NOR','mclaren','McLaren','+23.441s','Finished'),
-      mkR('7','6','bearman','87','Oliver','Bearman','BEA','haas','Haas F1 Team','+35.112s','Finished'),
-      mkR('8','4','gasly','10','Pierre','Gasly','GAS','alpine','Alpine','+44.887s','Finished'),
-      mkR('9','2','max_verstappen','1','Max','Verstappen','VER','red_bull','Red Bull Racing','+52.334s','Finished'),
-      mkR('10','1','colapinto','43','Franco','Colapinto','COL','racing_bulls','Racing Bulls','+1:00.112s','Finished')
+      mR('1','25','antonelli','12','Kimi','Antonelli','ANT','mercedes','Mercedes','1:30:11.441',2),
+      mR('2','18','russell','63','George','Russell','RUS','mercedes','Mercedes','+1.772s',1),
+      mR('3','15','leclerc','16','Charles','Leclerc','LEC','ferrari','Ferrari','+7.882s',4),
+      mR('4','12','hamilton','44','Lewis','Hamilton','HAM','ferrari','Ferrari','+11.223s',3),
+      mR('5','10','piastri','81','Oscar','Piastri','PIA','mclaren','McLaren','+18.004s',5),
+      mR('6','8','norris','4','Lando','Norris','NOR','mclaren','McLaren','+23.441s',6),
+      mR('7','6','bearman','87','Oliver','Bearman','BEA','haas','Haas F1 Team','+35.112s',8),
+      mR('8','4','gasly','10','Pierre','Gasly','GAS','alpine','Alpine','+44.887s',7),
+      mR('9','2','max_verstappen','1','Max','Verstappen','VER','red_bull','Red Bull Racing','+52.334s',9),
+      mR('10','1','colapinto','43','Franco','Colapinto','COL','racing_bulls','Racing Bulls','+1:00.112s',11),
+      mR('11','0','hadjar','22','Isack','Hadjar','HAD','racing_bulls','Racing Bulls','+1:05.441s',10),
+      mR('12','0','lawson','30','Liam','Lawson','LAW','red_bull','Red Bull Racing','+1:08.003s',13),
+      mR('13','0','sainz','55','Carlos','Sainz','SAI','williams','Williams','+1:12.221s',12),
+      mR('14','0','albon','23','Alexander','Albon','ALB','williams','Williams','+1:16.004s',14),
+      mR('15','0','hulkenberg','27','Nico','Hulkenberg','HUL','haas','Haas F1 Team','+1:19.332s',15),
+      mR('16','0','doohan','61','Jack','Doohan','DOO','alpine','Alpine','+1:22.001s',17),
+      mR('17','0','zhou','24','Guanyu','Zhou','ZHO','audi','Audi','+1:25.112s',16),
+      mR('18','0','bottas','77','Valtteri','Bottas','BOT','audi','Audi','+1:28.003s',18),
+      mR('19','0','alonso','14','Fernando','Alonso','ALO','aston_martin','Aston Martin','+1:31.221s',19),
+      mR('20','0','stroll','18','Lance','Stroll','STR','aston_martin','Aston Martin','+1:34.003s',20)
     ],
     '3':[
-      mkR('1','25','antonelli','12','Kimi','Antonelli','ANT','mercedes','Mercedes','1:28:14.802','Finished'),
-      mkR('2','18','russell','63','George','Russell','RUS','mercedes','Mercedes','+3.441s','Finished'),
-      mkR('3','15','leclerc','16','Charles','Leclerc','LEC','ferrari','Ferrari','+9.127s','Finished'),
-      mkR('4','12','hamilton','44','Lewis','Hamilton','HAM','ferrari','Ferrari','+14.882s','Finished'),
-      mkR('5','10','norris','4','Lando','Norris','NOR','mclaren','McLaren','+22.311s','Finished'),
-      mkR('6','8','piastri','81','Oscar','Piastri','PIA','mclaren','McLaren','+28.004s','Finished'),
-      mkR('7','6','bearman','87','Oliver','Bearman','BEA','haas','Haas F1 Team','+41.552s','Finished'),
-      mkR('8','4','gasly','10','Pierre','Gasly','GAS','alpine','Alpine','+52.113s','Finished'),
-      mkR('9','2','max_verstappen','1','Max','Verstappen','VER','red_bull','Red Bull Racing','+58.774s','Finished'),
-      mkR('10','1','hadjar','22','Isack','Hadjar','HAD','racing_bulls','Racing Bulls','+1:04.441s','Finished')
+      mR('1','25','antonelli','12','Kimi','Antonelli','ANT','mercedes','Mercedes','1:28:14.802',1),
+      mR('2','18','russell','63','George','Russell','RUS','mercedes','Mercedes','+3.441s',2),
+      mR('3','15','leclerc','16','Charles','Leclerc','LEC','ferrari','Ferrari','+9.127s',3),
+      mR('4','12','hamilton','44','Lewis','Hamilton','HAM','ferrari','Ferrari','+14.882s',5),
+      mR('5','10','norris','4','Lando','Norris','NOR','mclaren','McLaren','+22.311s',4),
+      mR('6','8','piastri','81','Oscar','Piastri','PIA','mclaren','McLaren','+28.004s',6),
+      mR('7','6','bearman','87','Oliver','Bearman','BEA','haas','Haas F1 Team','+41.552s',8),
+      mR('8','4','gasly','10','Pierre','Gasly','GAS','alpine','Alpine','+52.113s',7),
+      mR('9','2','max_verstappen','1','Max','Verstappen','VER','red_bull','Red Bull Racing','+58.774s',12),
+      mR('10','1','hadjar','22','Isack','Hadjar','HAD','racing_bulls','Racing Bulls','+1:04.441s',11),
+      mR('11','0','colapinto','43','Franco','Colapinto','COL','racing_bulls','Racing Bulls','+1:09.001s',10),
+      mR('12','0','lawson','30','Liam','Lawson','LAW','red_bull','Red Bull Racing','+1:12.443s',13),
+      mR('13','0','sainz','55','Carlos','Sainz','SAI','williams','Williams','+1:17.221s',12),
+      mR('14','0','albon','23','Alexander','Albon','ALB','williams','Williams','+1:20.002s',14),
+      mR('15','0','hulkenberg','27','Nico','Hulkenberg','HUL','haas','Haas F1 Team','+1:23.444s',16),
+      mR('16','0','doohan','61','Jack','Doohan','DOO','alpine','Alpine','+1:26.002s',17),
+      mR('17','0','zhou','24','Guanyu','Zhou','ZHO','audi','Audi','+1:29.112s',15),
+      mR('18','0','bottas','77','Valtteri','Bottas','BOT','audi','Audi','+1:32.003s',18),
+      mR('19','0','stroll','18','Lance','Stroll','STR','aston_martin','Aston Martin','+1:35.221s',19),
+      mR('20','0','alonso','14','Fernando','Alonso','ALO','aston_martin','Aston Martin','+1:38.003s',20)
     ]
+  },
+  /* Pit stop data per team per round (seconds) */
+  pitStops:{
+    mercedes: {fastest:2.21, avg:2.58, total:6},
+    ferrari:  {fastest:2.34, avg:2.71, total:7},
+    mclaren:  {fastest:1.94, avg:2.42, total:5},
+    red_bull: {fastest:2.44, avg:2.89, total:7},
+    alpine:   {fastest:2.61, avg:3.01, total:6},
+    haas:     {fastest:2.72, avg:3.14, total:5},
+    racing_bulls:{fastest:2.55, avg:2.98, total:6},
+    williams: {fastest:2.83, avg:3.22, total:5},
+    audi:     {fastest:3.01, avg:3.44, total:5},
+    aston_martin:{fastest:2.91, avg:3.31, total:5}
   }
 };
 
-/* ═══════════════════════════════════════════════════════════════
-   STATE  (seeded with fallback data — always has content)
-═══════════════════════════════════════════════════════════════ */
-let state = {
+/* ═══════════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════════ */
+var state = {
   schedule:            F2026.schedule,
   driverStandings:     F2026.driverStandings,
   conStandings:        F2026.conStandings,
   lastRaceResults:     F2026.lastRace,
-  raceResultsPerRound: Object.assign({}, F2026.results),
-  loaded: false,
-  apiOk:  false
+  raceResultsPerRound: JSON.parse(JSON.stringify(F2026.results)),
+  pitStops:            F2026.pitStops,
+  loaded: false, apiOk: false
 };
-let cdTimers = [];
+var cdTimers = [];
 
-/* ═══════════════════════════════════════════════════════════════
-   GREETING & DATE
-═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   GREETING
+═══════════════════════════════════════════════════════════ */
 (function(){
-  const n = new Date(), h = n.getHours();
-  document.getElementById('greeting').textContent =
-    (h<12?'Good morning':h<17?'Good afternoon':'Good evening') + ', Rohith';
-  const D=['SUN','MON','TUE','WED','THU','FRI','SAT'];
-  const M=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-  document.getElementById('dateline').textContent =
-    D[n.getDay()] + ' · ' + String(n.getDate()).padStart(2,'0') + ' ' + M[n.getMonth()] + ' · ' + n.getFullYear();
+  var n=new Date(),h=n.getHours();
+  el('greeting').textContent=(h<12?'Good morning':h<17?'Good afternoon':'Good evening')+', Rohith';
+  var D=['SUN','MON','TUE','WED','THU','FRI','SAT'],M=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  el('dateline').textContent=D[n.getDay()]+' · '+String(n.getDate()).padStart(2,'0')+' '+M[n.getMonth()]+' · '+n.getFullYear();
 })();
 
-/* ═══════════════════════════════════════════════════════════════
-   FETCH WITH HARD TIMEOUT
-═══════════════════════════════════════════════════════════════ */
-function pill(id,st){ const el=document.getElementById(id); if(el) el.className='api-pill '+st; }
-
-async function fetchJ(url, ms){
-  ms = ms || 6000;
-  const ctrl = new AbortController();
-  const t = setTimeout(function(){ ctrl.abort(); }, ms);
-  try {
-    const r = await fetch(url, {signal: ctrl.signal, headers:{'Accept':'application/json'}});
+/* ═══════════════════════════════════════════════════════════
+   FETCH + OVERLAY
+═══════════════════════════════════════════════════════════ */
+async function fetchJ(url,ms){
+  ms=ms||6000;
+  var ctrl=new AbortController();
+  var t=setTimeout(function(){ctrl.abort();},ms);
+  try{
+    var r=await fetch(url,{signal:ctrl.signal,headers:{'Accept':'application/json'}});
     clearTimeout(t);
-    if(!r.ok) throw new Error('HTTP ' + r.status);
+    if(!r.ok) throw new Error('HTTP '+r.status);
     return r.json();
-  } catch(e) {
-    clearTimeout(t);
-    throw e;
-  }
+  }catch(e){clearTimeout(t);throw e;}
+}
+var _gone=false;
+function hideOverlay(){
+  if(_gone)return; _gone=true;
+  var ov=el('loadingOverlay');
+  if(!ov)return;
+  ov.classList.add('hidden');
+  setTimeout(function(){ov.style.display='none';},700);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   LOAD API DATA  (enhances fallback, never blocks page)
-═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   LOAD API (enhances fallback data — post-race auto-updates)
+═══════════════════════════════════════════════════════════ */
 async function loadAll(){
-  pill('pill-sched','loading');
-  pill('pill-drivers','loading');
-  pill('pill-cons','loading');
-  pill('pill-last','loading');
-
-  const [sched,drivers,cons,lastRace] = await Promise.allSettled([
-    fetchJ(BASE + '/' + SEASON + '.json?limit=30'),
-    fetchJ(BASE + '/' + SEASON + '/driverStandings.json'),
-    fetchJ(BASE + '/' + SEASON + '/constructorStandings.json'),
-    fetchJ(BASE + '/' + SEASON + '/last/results.json?limit=25')
+  pill('pill-sched','loading'); pill('pill-drivers','loading');
+  pill('pill-cons','loading');  pill('pill-last','loading');
+  var [sc,dr,co,lr]=await Promise.allSettled([
+    fetchJ(BASE+'/'+SEASON+'.json?limit=30'),
+    fetchJ(BASE+'/'+SEASON+'/driverStandings.json'),
+    fetchJ(BASE+'/'+SEASON+'/constructorStandings.json'),
+    fetchJ(BASE+'/'+SEASON+'/last/results.json?limit=25')
   ]);
-
-  pill('pill-sched',  sched.status==='fulfilled'?'done':'error');
-  pill('pill-drivers',drivers.status==='fulfilled'?'done':'error');
-  pill('pill-cons',   cons.status==='fulfilled'?'done':'error');
-  pill('pill-last',   lastRace.status==='fulfilled'?'done':'error');
-
-  var anyOk = false;
-  if(sched.status==='fulfilled'){
-    var races = (sched.value && sched.value.MRData && sched.value.MRData.RaceTable && sched.value.MRData.RaceTable.Races) || [];
-    if(races.length > 0){ state.schedule = races; anyOk = true; }
+  pill('pill-sched', sc.status==='fulfilled'?'done':'error');
+  pill('pill-drivers',dr.status==='fulfilled'?'done':'error');
+  pill('pill-cons',   co.status==='fulfilled'?'done':'error');
+  pill('pill-last',   lr.status==='fulfilled'?'done':'error');
+  var anyOk=false;
+  if(sc.status==='fulfilled'){
+    var races=(sc.value&&sc.value.MRData&&sc.value.MRData.RaceTable&&sc.value.MRData.RaceTable.Races)||[];
+    if(races.length>0){state.schedule=races;anyOk=true;}
   }
-  if(drivers.status==='fulfilled'){
-    var ds = (drivers.value && drivers.value.MRData && drivers.value.MRData.StandingsTable &&
-              drivers.value.MRData.StandingsTable.StandingsLists &&
-              drivers.value.MRData.StandingsTable.StandingsLists[0] &&
-              drivers.value.MRData.StandingsTable.StandingsLists[0].DriverStandings) || [];
-    if(ds.length > 0) state.driverStandings = ds;
+  if(dr.status==='fulfilled'){
+    var ds=(dr.value&&dr.value.MRData&&dr.value.MRData.StandingsTable&&dr.value.MRData.StandingsTable.StandingsLists&&dr.value.MRData.StandingsTable.StandingsLists[0]&&dr.value.MRData.StandingsTable.StandingsLists[0].DriverStandings)||[];
+    if(ds.length>0) state.driverStandings=ds;
   }
-  if(cons.status==='fulfilled'){
-    var cs = (cons.value && cons.value.MRData && cons.value.MRData.StandingsTable &&
-              cons.value.MRData.StandingsTable.StandingsLists &&
-              cons.value.MRData.StandingsTable.StandingsLists[0] &&
-              cons.value.MRData.StandingsTable.StandingsLists[0].ConstructorStandings) || [];
-    if(cs.length > 0) state.conStandings = cs;
+  if(co.status==='fulfilled'){
+    var cs=(co.value&&co.value.MRData&&co.value.MRData.StandingsTable&&co.value.MRData.StandingsTable.StandingsLists&&co.value.MRData.StandingsTable.StandingsLists[0]&&co.value.MRData.StandingsTable.StandingsLists[0].ConstructorStandings)||[];
+    if(cs.length>0) state.conStandings=cs;
   }
-  if(lastRace.status==='fulfilled'){
-    var lr = (lastRace.value && lastRace.value.MRData && lastRace.value.MRData.RaceTable &&
-              lastRace.value.MRData.RaceTable.Races && lastRace.value.MRData.RaceTable.Races[0]) || null;
-    if(lr && lr.Results && lr.Results.length > 0){ state.lastRaceResults = lr; }
+  if(lr.status==='fulfilled'){
+    var lrr=(lr.value&&lr.value.MRData&&lr.value.MRData.RaceTable&&lr.value.MRData.RaceTable.Races&&lr.value.MRData.RaceTable.Races[0])||null;
+    if(lrr&&lrr.Results&&lrr.Results.length>0) state.lastRaceResults=lrr;
   }
-
-  state.apiOk = anyOk;
+  state.apiOk=anyOk;
   await loadRoundResults();
-  state.loaded = true;
-  document.getElementById('lastUpdated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+  state.loaded=true;
+  el('lastUpdated').textContent='API updated '+new Date().toLocaleTimeString();
 }
 
 async function loadRoundResults(){
-  /* Fallback already set. Try to get API results for completed rounds. */
-  var now = Date.now();
-  var completed = state.schedule.filter(function(r){
-    return new Date(r.date + 'T' + (r.time || '14:00:00Z')).getTime() < now;
-  }).slice(0, 8);
-
-  await Promise.allSettled(completed.map(function(r){
-    return fetchJ(BASE + '/' + SEASON + '/' + r.round + '/results.json?limit=10', 5000)
+  var now=Date.now();
+  var done=state.schedule.filter(function(r){
+    return new Date(r.date+'T'+(r.time||'14:00:00Z')).getTime()<now;
+  }).slice(0,10);
+  await Promise.allSettled(done.map(function(r){
+    return fetchJ(BASE+'/'+SEASON+'/'+r.round+'/results.json?limit=25',5000)
       .then(function(d){
-        var res = (d && d.MRData && d.MRData.RaceTable && d.MRData.RaceTable.Races &&
-                   d.MRData.RaceTable.Races[0] && d.MRData.RaceTable.Races[0].Results) || [];
-        if(res.length > 0) state.raceResultsPerRound[r.round] = res;
+        var res=(d&&d.MRData&&d.MRData.RaceTable&&d.MRData.RaceTable.Races&&d.MRData.RaceTable.Races[0]&&d.MRData.RaceTable.Races[0].Results)||[];
+        if(res.length>0) state.raceResultsPerRound[r.round]=res;
       }).catch(function(){});
   }));
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   OVERLAY DISMISS
-═══════════════════════════════════════════════════════════════ */
-var _overlayGone = false;
-function hideOverlay(){
-  if(_overlayGone) return;
-  _overlayGone = true;
-  var ov = document.getElementById('loadingOverlay');
-  if(!ov) return;
-  ov.classList.add('hidden');
-  setTimeout(function(){ ov.style.display='none'; }, 700);
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   COUNTDOWN TIMER
-═══════════════════════════════════════════════════════════════ */
-function startCountdown(target, dId, hId, mId, sId){
-  function pad(n){ return String(n).padStart(2,'0'); }
+/* ═══════════════════════════════════════════════════════════
+   COUNTDOWN
+═══════════════════════════════════════════════════════════ */
+function startCountdown(target,dId,hId,mId,sId){
+  function pad(n){return String(n).padStart(2,'0');}
   function tick(){
-    var diff = target.getTime() - Date.now();
-    if(diff <= 0){
-      [dId,hId,mId,sId].forEach(function(id){ var e=document.getElementById(id); if(e) e.textContent='00'; });
-      return;
-    }
-    function set(id,val){ var e=document.getElementById(id); if(e) e.textContent=pad(val); }
-    set(dId, Math.floor(diff/86400000));
-    set(hId, Math.floor((diff%86400000)/3600000));
-    set(mId, Math.floor((diff%3600000)/60000));
-    set(sId, Math.floor((diff%60000)/1000));
+    var diff=target.getTime()-Date.now();
+    if(diff<=0){[dId,hId,mId,sId].forEach(function(id){var e=el(id);if(e)e.textContent='00';});return;}
+    function set(id,v){var e=el(id);if(e)e.textContent=pad(v);}
+    set(dId,Math.floor(diff/86400000));
+    set(hId,Math.floor((diff%86400000)/3600000));
+    set(mId,Math.floor((diff%3600000)/60000));
+    set(sId,Math.floor((diff%60000)/1000));
   }
-  tick();
-  var t = setInterval(tick, 1000);
-  cdTimers.push(t);
+  tick(); var t=setInterval(tick,1000); cdTimers.push(t);
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    RENDER: NEXT RACE
-═══════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function renderNextRace(){
-  var now = Date.now();
-  var upcoming = null;
+  var now=Date.now(), upcoming=null;
   for(var i=0;i<state.schedule.length;i++){
-    var r = state.schedule[i];
-    var d = new Date(r.date + 'T' + (r.time || '14:00:00Z'));
-    if(d.getTime() > now){ upcoming = r; break; }
+    var r=state.schedule[i];
+    if(new Date(r.date+'T'+(r.time||'14:00:00Z')).getTime()>now){upcoming=r;break;}
   }
   if(!upcoming){
-    document.getElementById('nextRaceInfo').innerHTML =
-      '<div style="color:rgba(255,255,255,.5);font-family:\'JetBrains Mono\',monospace;font-size:12px;padding:20px 0">Season complete — see you next year!</div>';
+    el('nextRaceInfo').innerHTML='<div style="color:rgba(255,255,255,.5);font-family:\'JetBrains Mono\',monospace;font-size:12px;padding:20px 0">Season complete!</div>';
     return;
   }
-  var raceDate = new Date(upcoming.date + 'T' + (upcoming.time || '14:00:00Z'));
-  var loc = upcoming.Circuit && upcoming.Circuit.Location;
-  var flag = circuitFlag((loc && loc.locality) || '');
-  document.getElementById('nextRaceInfo').innerHTML =
-    '<div>' +
-    '<div class="race-round-badge">Round ' + upcoming.round + ' · Up Next</div>' +
-    '<div class="race-flag-row"><span class="race-flag-emoji">' + flag + '</span>' +
-    '<div style="font-family:\'JetBrains Mono\',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5)">' + ((loc && loc.country) || '') + '</div></div>' +
-    '<h2 class="race-name">' + upcoming.raceName.replace('Grand Prix','<em>Grand Prix</em>') + '</h2>' +
-    '<div class="race-circuit-line"><strong>' + ((upcoming.Circuit && upcoming.Circuit.circuitName) || '') + '</strong> · ' + ((loc && loc.locality) || '') + '</div>' +
-    '<div class="race-stats-row">' +
-    '<div class="race-stat"><div class="race-stat-lbl">Race Date</div><div class="race-stat-val">' + raceDate.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) + '</div></div>' +
-    '<div class="race-stat"><div class="race-stat-lbl">Round</div><div class="race-stat-val">' + upcoming.round + ' of ' + state.schedule.length + '</div></div>' +
-    '<div class="race-stat"><div class="race-stat-lbl">Circuit</div><div class="race-stat-val">' + ((loc && loc.locality) || '') + '</div></div>' +
+  var rd=new Date(upcoming.date+'T'+(upcoming.time||'14:00:00Z'));
+  var loc=upcoming.Circuit&&upcoming.Circuit.Location;
+  var flag=circuitFlag((loc&&loc.locality)||'');
+  el('nextRaceInfo').innerHTML='<div>'+
+    '<div class="race-round-badge">Round '+upcoming.round+' · Up Next</div>'+
+    '<div class="race-flag-row"><span class="race-flag-emoji">'+flag+'</span>'+
+    '<div style="font-family:\'JetBrains Mono\',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5)">'+((loc&&loc.country)||'')+'</div></div>'+
+    '<h2 class="race-name">'+upcoming.raceName.replace('Grand Prix','<em>Grand Prix</em>')+'</h2>'+
+    '<div class="race-circuit-line"><strong>'+((upcoming.Circuit&&upcoming.Circuit.circuitName)||'')+'</strong> · '+((loc&&loc.locality)||'')+'</div>'+
+    '<div class="race-stats-row">'+
+    '<div class="race-stat"><div class="race-stat-lbl">Race Date</div><div class="race-stat-val">'+rd.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+'</div></div>'+
+    '<div class="race-stat"><div class="race-stat-lbl">Round</div><div class="race-stat-val">'+upcoming.round+' / '+state.schedule.length+'</div></div>'+
+    '<div class="race-stat"><div class="race-stat-lbl">Circuit</div><div class="race-stat-val">'+((loc&&loc.locality)||'')+'</div></div>'+
     '</div></div>';
-  startCountdown(raceDate,'cd-d','cd-h','cd-m','cd-s');
-  startCountdown(raceDate,'lcd2-d','lcd2-h','lcd2-m','lcd2-s');
-  var rname = upcoming.raceName.replace('Grand Prix','<em>Grand Prix</em>');
-  var el1 = document.getElementById('liveNextRaceName2');
-  if(el1) el1.innerHTML = flag + ' ' + rname;
-  /* Tire section */
-  var tireEl = document.getElementById('tireTitle');
-  if(tireEl) tireEl.innerHTML = upcoming.raceName + ' <em>Strategy</em> Preview';
-  var circEl = document.getElementById('tireCircuit');
-  if(circEl) circEl.textContent = (loc && loc.locality) || 'TBA';
-  var lapsEl = document.getElementById('tireLaps');
-  if(lapsEl) lapsEl.textContent = 'Circuit — ' + ((loc && loc.country) || '');
-  /* Weekend schedule */
+  cdTimers.forEach(function(t){clearInterval(t);}); cdTimers=[];
+  startCountdown(rd,'cd-d','cd-h','cd-m','cd-s');
+  startCountdown(rd,'lcd2-d','lcd2-h','lcd2-m','lcd2-s');
+  var rname=upcoming.raceName.replace('Grand Prix','<em>Grand Prix</em>');
+  var e2=el('liveNextRaceName2'); if(e2) e2.innerHTML=flag+' '+rname;
+  var eT=el('tireTitle'); if(eT) eT.innerHTML=upcoming.raceName+' <em>Strategy</em> Preview';
+  var eC=el('tireCircuit'); if(eC) eC.textContent=(loc&&loc.locality)||'TBA';
+  var eL=el('tireLaps'); if(eL) eL.textContent=(loc&&loc.country)||'';
   renderWeekendSchedule(upcoming);
 }
 
 function renderWeekendSchedule(race){
-  if(!race) return;
-  var sessions = [
-    {name:'Practice 1',    key:'FirstPractice'},
-    {name:'Practice 2',    key:'SecondPractice'},
-    {name:'Practice 3',    key:'ThirdPractice'},
-    {name:'Sprint Qualifying', key:'SprintQualifying'},
-    {name:'Sprint',        key:'Sprint'},
-    {name:'Qualifying',    key:'Qualifying'},
-    {name:'Race',          key:'_race', date:race.date, time:race.time}
+  if(!race)return;
+  var sessions=[
+    {name:'Practice 1',key:'FirstPractice'},{name:'Practice 2',key:'SecondPractice'},
+    {name:'Practice 3',key:'ThirdPractice'},{name:'Sprint Qualifying',key:'SprintQualifying'},
+    {name:'Sprint',key:'Sprint'},{name:'Qualifying',key:'Qualifying'},
+    {name:'Race',key:'_race',date:race.date,time:race.time}
   ];
-  var now = Date.now();
-  var el = document.getElementById('weekendLabel');
-  if(el) el.textContent = (race.raceName || 'Race Weekend') + ' · Schedule';
-  var html = sessions.map(function(s){
-    var sess = s.key === '_race' ? {date:race.date, time:race.time} : race[s.key];
-    if(!sess || !sess.date) return '';
-    var dt = new Date(sess.date + 'T' + (sess.time || '12:00:00Z'));
-    var isPast = dt.getTime() < now;
-    var isActive = !isPast && (dt.getTime() - now) < 3600000 * 4;
-    return '<div class="session-row ' + (isPast?'done':isActive?'active':'') + '">' +
-      '<span class="session-name">' + s.name + '</span>' +
-      '<span class="session-time">' + dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'}) + ' · ' + dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}) + ' UTC</span>' +
-      '<span class="session-status ' + (isPast?'done':isActive?'live':'upcoming') + '">' + (isPast?'DONE':isActive?'LIVE':'TBC') + '</span>' +
-      '</div>';
+  var now=Date.now();
+  var wl=el('weekendLabel'); if(wl) wl.textContent=(race.raceName||'Race Weekend')+' · Schedule';
+  var html=sessions.map(function(s){
+    var sess=s.key==='_race'?{date:race.date,time:race.time}:race[s.key];
+    if(!sess||!sess.date)return '';
+    var dt=new Date(sess.date+'T'+(sess.time||'12:00:00Z'));
+    var isPast=dt.getTime()<now, isActive=!isPast&&(dt.getTime()-now)<14400000;
+    return '<div class="session-row '+(isPast?'done':isActive?'active':'')+'">' +
+      '<span class="session-name">'+s.name+'</span>'+
+      '<span class="session-time">'+dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' · '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})+' UTC</span>'+
+      '<span class="session-status '+(isPast?'done':isActive?'live':'upcoming')+'">'+(isPast?'DONE':isActive?'LIVE':'TBC')+'</span></div>';
   }).filter(Boolean).join('');
-  var wrap = document.getElementById('weekendSchedule');
-  if(wrap) wrap.innerHTML = html || '<div style="padding:16px;color:rgba(255,255,255,.3);font-family:monospace;font-size:10px">Schedule TBC</div>';
+  var ws=el('weekendSchedule');
+  if(ws) ws.innerHTML=html||'<div style="padding:16px;color:rgba(255,255,255,.3);font-family:monospace;font-size:10px">Schedule TBC</div>';
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RENDER: DRIVER SPOTLIGHT
-═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   RENDER: SPOTLIGHT
+═══════════════════════════════════════════════════════════ */
 function renderSpotlight(){
-  var ds = state.driverStandings;
-  var myDriver = null;
+  var ds=state.driverStandings, myDriver=null;
   for(var i=0;i<ds.length;i++){
-    if(ds[i].Driver && (ds[i].Driver.driverId === FAV_DRIVER_ID || ds[i].Driver.permanentNumber === FAV_DRIVER_NUM)){
-      myDriver = ds[i]; break;
-    }
+    if(ds[i].Driver&&(ds[i].Driver.driverId===FAV_DRIVER_ID||ds[i].Driver.permanentNumber===FAV_DRIVER_NUM)){myDriver=ds[i];break;}
   }
-  if(!myDriver){
-    document.getElementById('spotlightCard').innerHTML = '<div style="padding:30px;color:rgba(255,255,255,.4);font-family:\'JetBrains Mono\',monospace">Driver not found.</div>';
-    return;
-  }
-  var d = myDriver.Driver;
-  var cons = myDriver.Constructors && myDriver.Constructors[0];
-  var leader = ds[0];
-  var gap = leader ? Math.max(0, parseInt(leader.points) - parseInt(myDriver.points)) : 0;
-  var tc = teamColor(cons && cons.constructorId);
-
-  var hamResults = [];
-  var rounds = Object.keys(state.raceResultsPerRound).sort(function(a,b){return parseInt(a)-parseInt(b);});
-  for(var ri=0;ri<rounds.length;ri++){
-    var rnd = rounds[ri];
-    var res = state.raceResultsPerRound[rnd];
+  if(!myDriver){el('spotlightCard').innerHTML='<div style="padding:30px;color:rgba(255,255,255,.4);font-family:\'JetBrains Mono\',monospace">Driver not found.</div>';return;}
+  var d=myDriver.Driver, cons=myDriver.Constructors&&myDriver.Constructors[0];
+  var leader=ds[0], gap=leader?Math.max(0,parseInt(leader.points)-parseInt(myDriver.points)):0;
+  var tc=teamColor(cons&&cons.constructorId);
+  var hamResults=[];
+  Object.keys(state.raceResultsPerRound).sort(function(a,b){return parseInt(a)-parseInt(b);}).forEach(function(rnd){
+    var res=state.raceResultsPerRound[rnd];
     for(var j=0;j<res.length;j++){
-      var r = res[j];
-      if(r.Driver && (r.Driver.driverId === FAV_DRIVER_ID || r.Driver.permanentNumber === FAV_DRIVER_NUM)){
-        var race = null;
-        for(var k=0;k<state.schedule.length;k++){ if(state.schedule[k].round == rnd){ race=state.schedule[k]; break; } }
-        var loc = (race && race.Circuit && race.Circuit.Location && race.Circuit.Location.locality) || ('R'+rnd);
-        hamResults.push({rnd:parseInt(rnd),flag:circuitFlag(loc),loc:loc,pos:parseInt(r.position),pts:parseInt(r.points||0),isBest:false});
+      if(res[j].Driver&&(res[j].Driver.driverId===FAV_DRIVER_ID||res[j].Driver.permanentNumber===FAV_DRIVER_NUM)){
+        var race=null;
+        for(var k=0;k<state.schedule.length;k++){if(state.schedule[k].round==rnd){race=state.schedule[k];break;}}
+        var loc=(race&&race.Circuit&&race.Circuit.Location&&race.Circuit.Location.locality)||('R'+rnd);
+        hamResults.push({rnd:parseInt(rnd),flag:circuitFlag(loc),loc:loc,pos:parseInt(res[j].position),pts:parseInt(res[j].points||0),isBest:false});
         break;
       }
     }
-  }
-  hamResults.sort(function(a,b){return a.rnd-b.rnd;});
-  if(hamResults.length > 0){
-    var bp = Math.min.apply(null, hamResults.map(function(r){return r.pos;}));
-    hamResults.forEach(function(r){ if(r.pos===bp) r.isBest=true; });
-  }
-  var bestFinish = hamResults.length > 0 ? 'P' + Math.min.apply(null,hamResults.map(function(r){return r.pos;})) : '--';
-
-  var rowsHtml = hamResults.slice(-5).map(function(r){
-    var cls = r.pos===1?'p1':r.pos===2?'p2':r.pos===3?'p3':'';
-    return '<div class="spot-round-row ' + (r.isBest?'best':'') + '">' +
-      '<div class="spot-round-gp">' + r.flag + ' ' + r.loc.substring(0,5).toUpperCase() + '</div>' +
-      '<div class="spot-pos ' + cls + '">P' + r.pos + '</div>' +
-      '<div class="spot-pts">+' + r.pts + 'pts</div></div>';
+  });
+  if(hamResults.length){var bp=Math.min.apply(null,hamResults.map(function(r){return r.pos;}));hamResults.forEach(function(r){if(r.pos===bp)r.isBest=true;});}
+  var best=hamResults.length?'P'+Math.min.apply(null,hamResults.map(function(r){return r.pos;})):'--';
+  var rows=hamResults.slice(-5).map(function(r){
+    var cls=r.pos===1?'p1':r.pos===2?'p2':r.pos===3?'p3':'';
+    return '<div class="spot-round-row '+(r.isBest?'best':'')+'">' +
+      '<div class="spot-round-gp">'+r.flag+' '+r.loc.substring(0,5).toUpperCase()+'</div>' +
+      '<div class="spot-pos '+cls+'">P'+r.pos+'</div>' +
+      '<div class="spot-pts">+'+r.pts+'</div></div>';
   }).join('');
-
-  document.getElementById('spotlightCard').innerHTML =
-    '<div class="spot-left">' +
-    '<div class="spot-my-driver-label">My Driver</div>' +
-    '<div class="spot-number">' + (d.permanentNumber || FAV_DRIVER_NUM) + '</div>' +
-    '<div class="spot-fullname">' + d.givenName + ' <em>' + d.familyName + '</em></div>' +
-    '<div class="spot-team-badge" style="--tc:' + tc + '">' + ((cons && cons.name) || 'Ferrari') + '</div>' +
-    '<div class="spot-nationality">' + nationFlag(d.nationality) + ' ' + (d.nationality || '') + '</div>' +
-    '</div>' +
-    '<div class="spot-center">' +
-    '<div><div class="spot-stat-val y">P' + myDriver.position + '</div><div class="spot-stat-lbl">Championship</div></div>' +
-    '<div><div class="spot-stat-val">' + myDriver.points + '</div><div class="spot-stat-lbl">Points</div></div>' +
-    '<div><div class="spot-stat-val r">' + (gap > 0 ? '-'+gap : 'Leader') + '</div><div class="spot-stat-lbl">Gap to Lead</div></div>' +
-    '<div><div class="spot-stat-val">' + (myDriver.wins || 0) + '</div><div class="spot-stat-lbl">Wins</div></div>' +
-    '<div><div class="spot-stat-val">' + rounds.length + '</div><div class="spot-stat-lbl">Races Done</div></div>' +
-    '<div><div class="spot-stat-val y">' + bestFinish + '</div><div class="spot-stat-lbl">Best Finish</div></div>' +
-    '</div>' +
-    '<div class="spot-right">' +
-    '<div class="spot-rounds-label">Race-by-Race · ' + SEASON + '</div>' +
-    (rowsHtml || '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:rgba(255,255,255,.3);padding:10px">No races yet</div>') +
+  el('spotlightCard').innerHTML=
+    '<div class="spot-left"><div class="spot-my-driver-label">My Driver</div>'+
+    '<div class="spot-number">'+(d.permanentNumber||FAV_DRIVER_NUM)+'</div>'+
+    '<div class="spot-fullname">'+d.givenName+' <em>'+d.familyName+'</em></div>'+
+    '<div class="spot-team-badge" style="--tc:'+tc+'">'+(cons&&cons.name||'Ferrari')+'</div>'+
+    '<div class="spot-nationality">'+nationFlag(d.nationality)+' '+(d.nationality||'')+'</div></div>'+
+    '<div class="spot-center">'+
+    '<div><div class="spot-stat-val y">P'+myDriver.position+'</div><div class="spot-stat-lbl">Championship</div></div>'+
+    '<div><div class="spot-stat-val">'+myDriver.points+'</div><div class="spot-stat-lbl">Points</div></div>'+
+    '<div><div class="spot-stat-val r">'+(gap>0?'-'+gap:'Leader!')+'</div><div class="spot-stat-lbl">Gap to Lead</div></div>'+
+    '<div><div class="spot-stat-val">'+(myDriver.wins||0)+'</div><div class="spot-stat-lbl">Wins</div></div>'+
+    '<div><div class="spot-stat-val">'+Object.keys(state.raceResultsPerRound).length+'</div><div class="spot-stat-lbl">Races Done</div></div>'+
+    '<div><div class="spot-stat-val y">'+best+'</div><div class="spot-stat-lbl">Best Finish</div></div>'+
+    '</div>'+
+    '<div class="spot-right"><div class="spot-rounds-label">Race-by-Race · '+SEASON+'</div>'+
+    (rows||'<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:rgba(255,255,255,.3);padding:10px">No races yet</div>')+
     '</div>';
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    RENDER: CALENDAR
-═══════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function renderCalendar(){
-  var now = Date.now();
-  var done = state.schedule.filter(function(r){ return new Date(r.date+'T'+(r.time||'14:00:00Z')).getTime()<now; });
-  var pct = state.schedule.length ? done.length/state.schedule.length : 0;
-  document.getElementById('calMeta').textContent = state.schedule.length + ' Rounds · ' + SEASON;
-  var prog = document.getElementById('calProgress');
-  if(prog) setTimeout(function(){ prog.style.transform = 'scaleX('+pct+')'; }, 300);
-
-  var nextFound = false;
-  var html = state.schedule.map(function(r){
-    var rDate = new Date(r.date+'T'+(r.time||'14:00:00Z'));
-    var isDone = rDate.getTime() < now;
-    var isNext = !isDone && !nextFound && (nextFound=true);
-    var flag = circuitFlag((r.Circuit && r.Circuit.Location && r.Circuit.Location.locality) || '');
-    var winner = '';
-    if(isDone && state.raceResultsPerRound[r.round] && state.raceResultsPerRound[r.round][0]){
-      var w = state.raceResultsPerRound[r.round][0];
-      winner = '<div class="cal-winner">' + ((w.Driver && (w.Driver.code || w.Driver.familyName)) || '') + '</div>';
+  var now=Date.now();
+  var done=state.schedule.filter(function(r){return new Date(r.date+'T'+(r.time||'14:00:00Z')).getTime()<now;});
+  el('calMeta').textContent=state.schedule.length+' Rounds · '+SEASON;
+  var prog=el('calProgress');
+  if(prog)setTimeout(function(){prog.style.transform='scaleX('+(state.schedule.length?done.length/state.schedule.length:0)+')';},300);
+  var nextFound=false;
+  var html=state.schedule.map(function(r){
+    var rd=new Date(r.date+'T'+(r.time||'14:00:00Z'));
+    var isDone=rd.getTime()<now, isNext=!isDone&&!nextFound&&(nextFound=true);
+    var flag=circuitFlag((r.Circuit&&r.Circuit.Location&&r.Circuit.Location.locality)||'');
+    var winner='';
+    if(isDone&&state.raceResultsPerRound[r.round]&&state.raceResultsPerRound[r.round][0]){
+      var w=state.raceResultsPerRound[r.round][0];
+      winner='<div class="cal-winner">'+((w.Driver&&(w.Driver.code||w.Driver.familyName))||'')+'</div>';
     }
-    return '<div class="cal-round ' + (isDone?'done':isNext?'next':'') + '">' +
-      '<div class="cal-rnum">R' + String(r.round).padStart(2,'0') + (isNext?' · NEXT':'') + '<span class="cal-dot" style="' + (isDone||isNext?'':'display:none') + '"></span></div>' +
-      '<div class="cal-flag-emoji">' + flag + '</div>' +
-      '<div class="cal-country">' + ((r.Circuit && r.Circuit.Location && r.Circuit.Location.country) || '') + '</div>' +
-      '<div class="cal-flag-name">' + ((r.Circuit && r.Circuit.Location && r.Circuit.Location.locality) || r.raceName) + '</div>' +
-      '<div class="cal-date">' + new Date(r.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) + '</div>' +
-      winner + '</div>';
+    return '<div class="cal-round '+(isDone?'done':isNext?'next':'')+'">' +
+      '<div class="cal-rnum">R'+String(r.round).padStart(2,'0')+(isNext?' · NEXT':'')+'<span class="cal-dot" style="'+(isDone||isNext?'':'display:none')+'"></span></div>'+
+      '<div class="cal-flag-emoji">'+flag+'</div>'+
+      '<div class="cal-country">'+((r.Circuit&&r.Circuit.Location&&r.Circuit.Location.country)||'')+'</div>'+
+      '<div class="cal-flag-name">'+((r.Circuit&&r.Circuit.Location&&r.Circuit.Location.locality)||r.raceName)+'</div>'+
+      '<div class="cal-date">'+new Date(r.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})+'</div>'+
+      winner+'</div>';
   }).join('');
-  var strip = document.getElementById('calStrip');
+  var strip=el('calStrip');
   if(strip){
-    strip.innerHTML = html || '<div style="padding:30px;color:var(--ink-3);font-family:monospace;font-size:11px">No schedule data</div>';
-    setTimeout(function(){
-      var next = strip.querySelector('.cal-round.next');
-      if(next) strip.scrollTo({left:next.offsetLeft-60,behavior:'smooth'});
-    }, 800);
+    strip.innerHTML=html||'<div style="padding:30px;color:var(--ink-3);font-family:monospace">No schedule</div>';
+    setTimeout(function(){var n=strip.querySelector('.cal-round.next');if(n)strip.scrollTo({left:n.offsetLeft-60,behavior:'smooth'});},800);
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RENDER: DRIVER STANDINGS
-═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   RENDER: STANDINGS
+═══════════════════════════════════════════════════════════ */
 function renderDriverStandings(){
-  var now = Date.now();
-  var done = state.schedule.filter(function(r){ return new Date(r.date+'T'+(r.time||'14:00:00Z')).getTime()<now; });
-  document.getElementById('driverColSub').textContent = 'Top 10 · After ' + done.length + ' Round' + (done.length!==1?'s':'');
-  var leader = state.driverStandings[0];
-  var html = state.driverStandings.slice(0,10).map(function(ds,i){
-    var d = ds.Driver, c = ds.Constructors && ds.Constructors[0];
-    var tc = teamColor(c && c.constructorId);
-    var isMine = d && (d.driverId === FAV_DRIVER_ID || d.permanentNumber === FAV_DRIVER_NUM);
-    var gapStr = leader && i > 0 ? ' · <span class="dgap">-' + (parseInt(leader.points)-parseInt(ds.points)) + '</span>' : '';
-    return '<div class="driver-row ' + (i===0?'p1-row ':'') + (isMine?'my-driver-row':'') + '" style="--tc:' + tc + ';animation-delay:' + (i*0.07) + 's">' +
-      (isMine ? '<div class="fav-badge">MY DRIVER</div>' : '') +
-      '<div class="dpos">' + String(i+1).padStart(2,'0') + '</div>' +
-      '<div><div style="display:flex;align-items:center">' +
-      '<span class="dname">' + ((d && d.givenName && d.givenName.charAt(0)) || '') + '. ' + ((d && d.familyName) || '') + '</span>' +
-      '<span class="dcode" style="background:' + tc + '">' + ((d && d.code) || '') + '</span>' +
-      '</div><div class="dteam">' + ((c && c.name) || '') + (d && d.nationality ? ' · '+d.nationality : '') + gapStr + '</div></div>' +
-      '<div style="text-align:right"><div class="dpts">' + ds.points + '</div><div class="dpts-sub">pts</div></div></div>';
+  var now=Date.now();
+  var done=state.schedule.filter(function(r){return new Date(r.date+'T'+(r.time||'14:00:00Z')).getTime()<now;});
+  el('driverColSub').textContent='Top 10 · After '+done.length+' Round'+(done.length!==1?'s':'');
+  var leader=state.driverStandings[0];
+  var html=state.driverStandings.slice(0,10).map(function(ds,i){
+    var d=ds.Driver,c=ds.Constructors&&ds.Constructors[0],tc=teamColor(c&&c.constructorId);
+    var isMine=d&&(d.driverId===FAV_DRIVER_ID||d.permanentNumber===FAV_DRIVER_NUM);
+    var gapStr=leader&&i>0?' · <span class="dgap">-'+(parseInt(leader.points)-parseInt(ds.points))+'</span>':'';
+    return '<div class="driver-row '+(i===0?'p1-row ':' ')+(isMine?'my-driver-row':'')+'" style="--tc:'+tc+';animation-delay:'+(i*0.07)+'s">'+
+      (isMine?'<div class="fav-badge">MY DRIVER</div>':'')+
+      '<div class="dpos">'+String(i+1).padStart(2,'0')+'</div>'+
+      '<div><div style="display:flex;align-items:center"><span class="dname">'+((d&&d.givenName&&d.givenName.charAt(0))||'')+'. '+((d&&d.familyName)||'')+'</span>'+
+      '<span class="dcode" style="background:'+tc+'">'+((d&&d.code)||'')+'</span></div>'+
+      '<div class="dteam">'+((c&&c.name)||'')+((d&&d.nationality)?' · '+d.nationality:'')+gapStr+'</div></div>'+
+      '<div style="text-align:right"><div class="dpts">'+ds.points+'</div><div class="dpts-sub">pts</div></div></div>';
   }).join('');
-  document.getElementById('driverStandings').innerHTML = html || '<div class="col-loading"><div style="font-family:monospace;font-size:10px;color:var(--ink-3)">No data</div></div>';
+  el('driverStandings').innerHTML=html||'<div class="col-loading"><div style="font-family:monospace;font-size:10px;color:var(--ink-3)">No data</div></div>';
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RENDER: CONSTRUCTOR STANDINGS
-═══════════════════════════════════════════════════════════════ */
 function renderConStandings(){
-  var now = Date.now();
-  var done = state.schedule.filter(function(r){ return new Date(r.date+'T'+(r.time||'14:00:00Z')).getTime()<now; });
-  document.getElementById('conColSub').textContent = 'All Teams · After ' + done.length + ' Round' + (done.length!==1?'s':'');
-  var top = parseInt((state.conStandings[0] && state.conStandings[0].points) || 1) || 1;
-  var html = state.conStandings.map(function(cs,i){
-    var c = cs.Constructor;
-    var tc = teamColor(c && c.constructorId);
-    var pct = Math.max(2, Math.round(parseInt(cs.points)/top*100));
-    var isMine = c && c.constructorId && c.constructorId.includes(FAV_TEAM_ID);
-    return '<div class="con-row ' + (isMine?'my-team-row':'') + '" style="--tc:' + tc + ';animation-delay:' + (i*0.07) + 's">' +
-      '<div class="con-top"><div class="con-pos">' + (i+1) + '</div>' +
-      '<div><div class="con-name" ' + (isMine?'style="color:var(--racing);font-weight:700"':'') + '>' + ((c && c.name) || '') + (isMine?' ★':'') + '</div>' +
-      '<div class="con-info">' + ((c && c.nationality) || '') + '</div></div>' +
-      '<div class="con-pts">' + cs.points + '</div></div>' +
-      '<div class="con-bar"><div class="con-bar-fill" style="width:' + pct + '%;animation-delay:' + (i*0.1+0.5) + 's"></div></div></div>';
+  var now=Date.now();
+  var done=state.schedule.filter(function(r){return new Date(r.date+'T'+(r.time||'14:00:00Z')).getTime()<now;});
+  el('conColSub').textContent='All Teams · After '+done.length+' Round'+(done.length!==1?'s':'');
+  var top=parseInt((state.conStandings[0]&&state.conStandings[0].points)||1)||1;
+  var html=state.conStandings.map(function(cs,i){
+    var c=cs.Constructor,tc=teamColor(c&&c.constructorId);
+    var pct=Math.max(2,Math.round(parseInt(cs.points)/top*100));
+    var isMine=c&&c.constructorId&&c.constructorId.indexOf(FAV_TEAM_ID)!==-1;
+    return '<div class="con-row '+(isMine?'my-team-row':'')+'" style="--tc:'+tc+';animation-delay:'+(i*0.07)+'s">'+
+      '<div class="con-top"><div class="con-pos">'+(i+1)+'</div>'+
+      '<div><div class="con-name" '+(isMine?'style="color:var(--racing);font-weight:700"':'')+'>'+((c&&c.name)||'')+(isMine?' ★':'')+'</div>'+
+      '<div class="con-info">'+((c&&c.nationality)||'')+'</div></div>'+
+      '<div class="con-pts">'+cs.points+'</div></div>'+
+      '<div class="con-bar"><div class="con-bar-fill" style="width:'+pct+'%;animation-delay:'+(i*0.1+0.5)+'s"></div></div></div>';
   }).join('');
-  document.getElementById('conStandings').innerHTML = html || '<div class="col-loading"><div style="font-family:monospace;font-size:10px;color:var(--ink-3)">No data</div></div>';
+  el('conStandings').innerHTML=html||'<div class="col-loading"><div style="font-family:monospace;font-size:10px;color:var(--ink-3)">No data</div></div>';
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    RENDER: PADDOCK INTEL
-═══════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function renderPaddock(){
-  var race = state.lastRaceResults;
-  if(!race || !race.Results){
-    document.getElementById('lastRaceBlock').innerHTML = '<div class="col-loading"><div style="font-family:monospace;font-size:10px;color:var(--ink-3)">No race data</div></div>';
+  var race=state.lastRaceResults;
+  if(!race||!race.Results){
+    el('lastRaceBlock').innerHTML='<div class="col-loading"><div style="font-family:monospace;font-size:10px;color:var(--ink-3)">No race data</div></div>';
     return;
   }
-  document.getElementById('paddockSub').textContent = (race.raceName || '') + ' · ' + new Date(race.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'});
-  var top3 = race.Results.slice(0,3);
-  var podHtml = '<div class="podium-block"><div class="podium-head">' + (race.raceName || '') + ' · ' + ((race.Circuit && race.Circuit.Location && race.Circuit.Location.locality) || '') + '</div><div class="podium-list">' +
+  el('paddockSub').textContent=(race.raceName||'')+' · '+new Date(race.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+  var top3=race.Results.slice(0,3);
+  var podHtml='<div class="podium-block"><div class="podium-head">'+(race.raceName||'')+' · '+((race.Circuit&&race.Circuit.Location&&race.Circuit.Location.locality)||'')+'</div><div class="podium-list">'+
     top3.map(function(r,i){
-      var cls = ['p1','p2','p3'][i], badge = ['P1','P2','P3'][i];
-      return '<div class="pod-row ' + cls + '"><div class="pod-badge">' + badge + '</div>' +
-        '<div><div class="pod-dname">' + ((r.Driver && r.Driver.givenName && r.Driver.givenName.charAt(0)) || '') + '. ' + ((r.Driver && r.Driver.familyName) || '') + '</div>' +
-        '<div class="pod-driver-team">' + ((r.Constructor && r.Constructor.name) || '') + ' · #' + ((r.Driver && r.Driver.permanentNumber) || '') + '</div></div>' +
-        '<div class="pod-time">' + ((i===0 && r.Time && r.Time.time) ? r.Time.time : (r.Time && r.Time.time) || (r.status || '')) + '</div></div>';
-    }).join('') + '</div></div>';
-
-  var myResult = null;
+      var cls=['p1','p2','p3'][i],badge=['P1','P2','P3'][i];
+      return '<div class="pod-row '+cls+'"><div class="pod-badge">'+badge+'</div>'+
+        '<div><div class="pod-dname">'+((r.Driver&&r.Driver.givenName&&r.Driver.givenName.charAt(0))||'')+'. '+((r.Driver&&r.Driver.familyName)||'')+'</div>'+
+        '<div class="pod-driver-team">'+((r.Constructor&&r.Constructor.name)||'')+' · #'+((r.Driver&&r.Driver.permanentNumber)||'')+'</div></div>'+
+        '<div class="pod-time">'+((i===0&&r.Time&&r.Time.time)?r.Time.time:(r.Time&&r.Time.time)||(r.status||''))+'</div></div>';
+    }).join('')+'</div></div>';
+  var myResult=null;
   for(var j=0;j<race.Results.length;j++){
-    var r = race.Results[j];
-    if(r.Driver && (r.Driver.driverId===FAV_DRIVER_ID || r.Driver.permanentNumber===FAV_DRIVER_NUM)){ myResult=r; break; }
+    if(race.Results[j].Driver&&(race.Results[j].Driver.driverId===FAV_DRIVER_ID||race.Results[j].Driver.permanentNumber===FAV_DRIVER_NUM)){myResult=race.Results[j];break;}
   }
-  var hamHtml = myResult ?
-    '<article class="news-item lead ferrari-news"><div class="news-meta"><span class="news-kicker">My Driver</span><span class="news-num">LATEST</span></div>' +
-    '<h3 class="news-headline">Hamilton P' + myResult.position + ' — ' + (race.raceName || 'Last Race') + '</h3>' +
-    '<p class="news-body">Finished P' + myResult.position + ', earned ' + myResult.points + ' points. Gap to P1: ' + ((myResult.Time && myResult.Time.time) || myResult.status || '') + '</p></article>' : '';
-
-  var newsHtml = '<div class="news-block">' + hamHtml +
-    '<article class="news-item lead ferrari-news"><div class="news-meta"><span class="news-kicker">Ferrari Update</span><span class="news-num">01</span></div>' +
-    '<h3 class="news-headline">Ferrari floor upgrade targets Miami podium battle</h3>' +
-    '<p class="news-body">Ferrari brings major aerodynamic package to Miami. Sources suggest 0.3-0.4s potential gain — enough to challenge Mercedes head-on.</p></article>' +
-    '<article class="news-item lead"><div class="news-meta"><span class="news-kicker">The Story</span><span class="news-num">02</span></div>' +
-    '<h3 class="news-headline">Antonelli leads championship after back-to-back victories</h3>' +
-    '<p class="news-body">The 19-year-old Mercedes star has won China and Japan consecutively. Wolff shifted team orders mid-weekend. Russell now racing his teammate for the title.</p></article>' +
-    '<article class="news-item neutral"><div class="news-meta"><span class="news-kicker">Engine Wars</span><span class="news-num">03</span></div>' +
-    '<h3 class="news-headline">Red Bull PU deficit haunts Verstappen — P9 in Japan</h3>' +
-    '<p class="news-body">Despite full Ford works programme, Red Bull power unit is weakest on grid. Max fighting chassis limits, not just driver error.</p></article>' +
+  var hamHtml=myResult?
+    '<article class="news-item lead ferrari-news"><div class="news-meta"><span class="news-kicker">My Driver</span><span class="news-num">LATEST</span></div>'+
+    '<h3 class="news-headline">Hamilton P'+myResult.position+' — '+(race.raceName||'')+'</h3>'+
+    '<p class="news-body">P'+myResult.position+', '+myResult.points+' pts scored. '+((myResult.Time&&myResult.Time.time)||myResult.status||'')+'</p></article>':'';
+  el('lastRaceBlock').innerHTML=podHtml+'<div class="news-block">'+hamHtml+
+    '<article class="news-item lead ferrari-news"><div class="news-meta"><span class="news-kicker">Ferrari</span><span class="news-num">01</span></div>'+
+    '<h3 class="news-headline">Floor upgrade targets Miami gains of 0.3–0.4s</h3>'+
+    '<p class="news-body">Major aero package arrives at Miami. Ferrari sources suggest significant lap time gain — enough to challenge Mercedes on race pace.</p></article>'+
+    '<article class="news-item lead"><div class="news-meta"><span class="news-kicker">Championship</span><span class="news-num">02</span></div>'+
+    '<h3 class="news-headline">Antonelli back-to-back wins — the rookie sensation continues</h3>'+
+    '<p class="news-body">China and Japan victories put the 19-year-old Mercedes star firmly in championship control. Wolff denies team orders discussions.</p></article>'+
+    '<article class="news-item neutral"><div class="news-meta"><span class="news-kicker">Engine Wars</span><span class="news-num">03</span></div>'+
+    '<h3 class="news-headline">Red Bull PU deficit haunts Verstappen — P9 in Japan</h3>'+
+    '<p class="news-body">Ford partnership yet to deliver gains. Max estimates 15hp deficit to Mercedes. Title defence looking increasingly difficult.</p></article>'+
     '</div>';
-
-  document.getElementById('lastRaceBlock').innerHTML = podHtml + newsHtml;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RENDER: H2H
-═══════════════════════════════════════════════════════════════ */
-function renderH2H(){
-  var ds = state.driverStandings;
-  var lec = null, ham = null;
-  for(var i=0;i<ds.length;i++){
-    if(ds[i].Driver && ds[i].Driver.driverId === 'leclerc') lec = ds[i];
-    if(ds[i].Driver && (ds[i].Driver.driverId === FAV_DRIVER_ID || ds[i].Driver.permanentNumber === FAV_DRIVER_NUM)) ham = ds[i];
-  }
-  if(!lec || !ham) return;
-  var lecPts = parseInt(lec.points)||0, hamPts = parseInt(ham.points)||0;
-  var total = Math.max(lecPts + hamPts, 1);
-  function set(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
-  function setW(id,w){ var e=document.getElementById(id); if(e) e.style.width=w+'%'; }
-  set('h2h-lec-pos','P'+lec.position);
-  set('h2h-ham-pos','P'+ham.position);
-  set('h2h-lec-pts',lecPts);
-  set('h2h-ham-pts',hamPts);
-  setW('h2h-bar-l', Math.round(lecPts/total*100));
-  setW('h2h-bar-r', Math.round(hamPts/total*100));
-  var lecRes=[], hamRes=[];
-  Object.keys(state.raceResultsPerRound).forEach(function(rnd){
-    var res = state.raceResultsPerRound[rnd];
-    for(var j=0;j<res.length;j++){
-      if(res[j].Driver && res[j].Driver.driverId==='leclerc') lecRes.push(parseInt(res[j].position));
-      if(res[j].Driver && (res[j].Driver.driverId===FAV_DRIVER_ID || res[j].Driver.permanentNumber===FAV_DRIVER_NUM)) hamRes.push(parseInt(res[j].position));
-    }
+/* ═══════════════════════════════════════════════════════════
+   RENDER: ALL-TEAMS H2H (SCROLLABLE)
+═══════════════════════════════════════════════════════════ */
+function renderAllTeamsH2H(){
+  /* Build team → [drivers] map from standings */
+  var teamMap={};
+  state.driverStandings.forEach(function(ds){
+    var c=ds.Constructors&&ds.Constructors[0];
+    if(!c)return;
+    var cid=c.constructorId;
+    if(!teamMap[cid]) teamMap[cid]={cid:cid,name:c.name,drivers:[]};
+    teamMap[cid].drivers.push(ds);
   });
-  set('h2h-lec-best', lecRes.length ? 'P'+Math.min.apply(null,lecRes) : '--');
-  set('h2h-ham-best', hamRes.length ? 'P'+Math.min.apply(null,hamRes) : '--');
-  set('h2h-lec-wins', lec.wins||0);
-  set('h2h-ham-wins', ham.wins||0);
-  var leader = lecPts >= hamPts ? 'Leclerc' : 'Hamilton';
-  set('h2h-verdict', leader + ' leads the Ferrari internal battle after ' + Object.keys(state.raceResultsPerRound).length + ' completed rounds. Both drivers pushing hard with Miami upgrade incoming.');
+
+  /* Compute per-driver stats from raceResultsPerRound */
+  var allRaces=Object.keys(state.raceResultsPerRound);
+  var numRaces=allRaces.length;
+
+  function driverStats(dId,dNum){
+    var pts=0,wins=0,pods=0,bestPos=99,positions=[];
+    allRaces.forEach(function(rnd){
+      var res=state.raceResultsPerRound[rnd];
+      for(var j=0;j<res.length;j++){
+        if(res[j].Driver&&(res[j].Driver.driverId===dId||res[j].Driver.permanentNumber===dNum)){
+          var pos=parseInt(res[j].position);
+          pts+=parseInt(res[j].points||0);
+          if(pos===1) wins++;
+          if(pos<=3)  pods++;
+          if(pos<bestPos) bestPos=pos;
+          positions.push(pos);
+          break;
+        }
+      }
+    });
+    return {pts:pts,wins:wins,pods:pods,bestPos:bestPos===99?'--':'P'+bestPos,avgPos:positions.length?Math.round(positions.reduce(function(a,b){return a+b;},0)/positions.length*10)/10:'--'};
+  }
+
+  var teams=Object.values(teamMap).filter(function(t){return t.drivers.length>=2;});
+  if(!teams.length){
+    el('h2hAllTeams').innerHTML='<div style="padding:20px;font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--ink-3)">No teammate data yet</div>';
+    return;
+  }
+
+  /* Sort: put FAV_TEAM_ID first */
+  teams.sort(function(a,b){
+    if(a.cid.indexOf(FAV_TEAM_ID)!==-1) return -1;
+    if(b.cid.indexOf(FAV_TEAM_ID)!==-1) return 1;
+    return parseInt(a.drivers[0].position)-parseInt(b.drivers[0].position);
+  });
+
+  var cards=teams.map(function(team){
+    var d1=team.drivers[0], d2=team.drivers[1];
+    var tc=teamColor(team.cid);
+    var s1=driverStats(d1.Driver&&d1.Driver.driverId, d1.Driver&&d1.Driver.permanentNumber);
+    var s2=driverStats(d2.Driver&&d2.Driver.driverId, d2.Driver&&d2.Driver.permanentNumber);
+    var total=Math.max(s1.pts+s2.pts,1);
+    var pct1=Math.round(s1.pts/total*100), pct2=100-pct1;
+    var isFav=team.cid.indexOf(FAV_TEAM_ID)!==-1;
+    var isD1Mine=(d1.Driver&&d1.Driver.driverId===FAV_DRIVER_ID)||(d1.Driver&&d1.Driver.permanentNumber===FAV_DRIVER_NUM);
+    var isD2Mine=(d2.Driver&&d2.Driver.driverId===FAV_DRIVER_ID)||(d2.Driver&&d2.Driver.permanentNumber===FAV_DRIVER_NUM);
+
+    function dBlock(ds,sMine){
+      var d=ds.Driver;
+      return '<div class="h2h-card-driver">'+
+        '<div class="h2h-card-num" style="color:'+tc+'">P'+ds.position+'</div>'+
+        '<div class="h2h-card-name '+(sMine?'h2h-mine':'')+'">'+
+          ((d&&d.givenName&&d.givenName.charAt(0))||'')+'. '+((d&&d.familyName)||'')+(sMine?' ★':'')+
+        '</div>'+
+        '<div class="h2h-card-number" style="color:'+tc+'">#'+((d&&d.permanentNumber)||'')+'</div>'+
+        '</div>';
+    }
+
+    function row(label,v1,v2,unit){
+      var w1=Math.round(v1/(Math.max(v1+v2,1))*100), w2=100-w1;
+      return '<div class="h2h2-row">'+
+        '<span class="h2h2-val '+(v1>=v2?'h2h2-lead':'')+'">'+v1+(unit||'')+'</span>'+
+        '<span class="h2h2-label">'+label+'</span>'+
+        '<span class="h2h2-val '+(v2>v1?'h2h2-lead':'')+' right">'+v2+(unit||'')+'</span>'+
+        '</div>'+
+        '<div class="h2h2-bar"><div class="h2h2-bl" style="width:'+w1+'%;background:'+tc+'"></div>'+
+        '<div class="h2h2-br" style="width:'+w2+'%;background:'+tc+';opacity:.35"></div></div>';
+    }
+
+    return '<div class="h2h-team-card '+(isFav?'h2h-fav-team':'')+'">'+
+      '<div class="h2h-team-hdr" style="border-top:4px solid '+tc+'">'+
+        '<div class="h2h-team-name '+(isFav?'h2h-team-name-fav':'')+'" style="color:'+tc+'">'+team.name+'</div>'+
+        '<div class="h2h-team-rounds">'+numRaces+' race'+(numRaces!==1?'s':'')+' · '+SEASON+'</div>'+
+      '</div>'+
+      '<div class="h2h-drivers-row">'+dBlock(d1,isD1Mine)+dBlock(d2,isD2Mine)+'</div>'+
+      '<div class="h2h-stats-body">'+
+        row('Points',s1.pts,s2.pts)+
+        row('Wins',s1.wins,s2.wins)+
+        row('Podiums',s1.pods,s2.pods)+
+      '</div>'+
+      '<div class="h2h-extras">'+
+        '<div class="h2h-extra-item"><span class="h2h-extra-lbl">Best</span><span class="h2h-extra-v">'+s1.bestPos+'</span></div>'+
+        '<div class="h2h-extra-item"><span class="h2h-extra-lbl">Avg</span><span class="h2h-extra-v">P'+s1.avgPos+'</span></div>'+
+        '<div class="h2h-divider"></div>'+
+        '<div class="h2h-extra-item"><span class="h2h-extra-lbl">Avg</span><span class="h2h-extra-v">P'+s2.avgPos+'</span></div>'+
+        '<div class="h2h-extra-item"><span class="h2h-extra-lbl">Best</span><span class="h2h-extra-v">'+s2.bestPos+'</span></div>'+
+      '</div>'+
+      '</div>';
+  }).join('');
+
+  el('h2hAllTeams').innerHTML=cards;
+
+  /* scroll FAV team card into view */
+  setTimeout(function(){
+    var fav=el('h2hAllTeams').querySelector('.h2h-fav-team');
+    if(fav) fav.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  },600);
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    RENDER: STATS RIBBON
-═══════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function renderStatsRibbon(){
-  var leader = state.driverStandings[0];
-  var myDriver = null;
+  var leader=state.driverStandings[0], myDriver=null;
   for(var i=0;i<state.driverStandings.length;i++){
-    var d = state.driverStandings[i];
-    if(d.Driver && (d.Driver.driverId===FAV_DRIVER_ID || d.Driver.permanentNumber===FAV_DRIVER_NUM)){ myDriver=d; break; }
+    if(state.driverStandings[i].Driver&&(state.driverStandings[i].Driver.driverId===FAV_DRIVER_ID||state.driverStandings[i].Driver.permanentNumber===FAV_DRIVER_NUM)){myDriver=state.driverStandings[i];break;}
   }
-  var conLeader = state.conStandings[0];
-  var myTeam = null;
+  var conLeader=state.conStandings[0], myTeam=null;
   for(var j=0;j<state.conStandings.length;j++){
-    var c = state.conStandings[j];
-    if(c.Constructor && c.Constructor.constructorId && c.Constructor.constructorId.includes(FAV_TEAM_ID)){ myTeam=c; break; }
+    if(state.conStandings[j].Constructor&&state.conStandings[j].Constructor.constructorId&&state.conStandings[j].Constructor.constructorId.indexOf(FAV_TEAM_ID)!==-1){myTeam=state.conStandings[j];break;}
   }
-  var now = Date.now();
-  var done = state.schedule.filter(function(r){ return new Date(r.date+'T'+(r.time||'14:00:00Z')).getTime()<now; }).length;
-  var wdcGap = (leader && myDriver) ? parseInt(leader.points)-parseInt(myDriver.points) : 0;
-  var wccGap = (conLeader && myTeam) ? parseInt(conLeader.points)-parseInt(myTeam.points) : 0;
-  var stats = [
-    {label:'WDC Leader', big:(leader ? (leader.Driver && leader.Driver.familyName)||'--' : '--') + '<em style="font-size:60%;margin-left:6px">' + (leader?leader.points:'--') + 'pts</em>', sub:'Championship P1'},
-    {label:'My Driver Gap', big:'<span class="red">' + (wdcGap>0?'-'+wdcGap:'Leader!') + '</span>', sub:'Hamilton · P' + (myDriver?myDriver.position:'--')},
-    {label:'WCC Leader', big:(conLeader && conLeader.Constructor && conLeader.Constructor.name)||'--', sub:(conLeader?conLeader.points+' pts':'')},
-    {label:'Ferrari WCC Gap', big:'<span class="red">' + (wccGap>0?'-'+wccGap:'Leader!') + '</span>', sub:myTeam?'Ferrari · P'+myTeam.position:''},
-    {label:'Rounds Done', big:String(done), sub:'of ' + state.schedule.length + ' in ' + SEASON}
+  var now=Date.now();
+  var done=state.schedule.filter(function(r){return new Date(r.date+'T'+(r.time||'14:00:00Z')).getTime()<now;}).length;
+  var wdcGap=leader&&myDriver?parseInt(leader.points)-parseInt(myDriver.points):0;
+  var wccGap=conLeader&&myTeam?parseInt(conLeader.points)-parseInt(myTeam.points):0;
+  var stats=[
+    {label:'WDC Leader',big:(leader&&leader.Driver&&leader.Driver.familyName)||'--',sub:(leader?leader.points+' pts':'')},
+    {label:'HAM Gap to P1',big:'<span class="red">'+(wdcGap>0?'-'+wdcGap:'Leader')+'</span>',sub:'P'+(myDriver?myDriver.position:'--')+' · '+(myDriver?myDriver.points:'--')+'pts'},
+    {label:'WCC Leader',big:(conLeader&&conLeader.Constructor&&conLeader.Constructor.name)||'--',sub:(conLeader?conLeader.points+' pts':'')},
+    {label:'Ferrari WCC Gap',big:'<span class="red">'+(wccGap>0?'-'+wccGap:'Leader')+'</span>',sub:myTeam?'P'+myTeam.position+' WCC':''},
+    {label:'Rounds Done',big:String(done),sub:'of '+state.schedule.length+' · '+SEASON}
   ];
-  document.getElementById('statsGrid').innerHTML = stats.map(function(s,i){
-    return '<div class="stat-card" style="animation-delay:' + (i*0.1) + 's"><div class="stat-label">' + s.label + '</div><div class="stat-big">' + s.big + '</div><div class="stat-sub">' + s.sub + '</div></div>';
+  el('statsGrid').innerHTML=stats.map(function(s,i){
+    return '<div class="stat-card" style="animation-delay:'+(i*0.1)+'s"><div class="stat-label">'+s.label+'</div><div class="stat-big">'+s.big+'</div><div class="stat-sub">'+s.sub+'</div></div>';
   }).join('');
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    RENDER: TICKER
-═══════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function renderTicker(){
-  var leader = state.driverStandings[0];
-  var myDriver = null;
-  for(var i=0;i<state.driverStandings.length;i++){
-    var d = state.driverStandings[i];
-    if(d.Driver && (d.Driver.driverId===FAV_DRIVER_ID || d.Driver.permanentNumber===FAV_DRIVER_NUM)){ myDriver=d; break; }
-  }
-  var conLeader = state.conStandings[0];
-  var now = Date.now();
-  var nextRace = null;
-  for(var j=0;j<state.schedule.length;j++){
-    var r = state.schedule[j];
-    if(new Date(r.date+'T'+(r.time||'14:00:00Z')).getTime() > now){ nextRace=r; break; }
-  }
-  var items = [
-    {sym:'HAM', val:'HAMILTON', pts: myDriver ? 'P'+myDriver.position+' · '+myDriver.points+'pts' : 'Ferrari'},
-    {sym:'WDC', val: (leader && leader.Driver && leader.Driver.familyName) ? leader.Driver.familyName.toUpperCase() : 'LEADER', pts: leader ? leader.points+' pts' : '--'},
-    {sym:'WCC', val: (conLeader && conLeader.Constructor && conLeader.Constructor.name) ? conLeader.Constructor.name.toUpperCase() : 'LEADER', pts: conLeader ? conLeader.points+' pts' : '--'},
-    {sym:'NEXT', val: nextRace ? nextRace.raceName.replace(' Grand Prix','').toUpperCase() : 'TBA', pts: nextRace ? new Date(nextRace.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) : '--'},
-    {sym:'F1 2026', val:'PIT WALL', pts:'LIVE DATA'},
-    {sym:'GAP', val:'HAM TO P1', pts: (leader && myDriver) ? '-'+(parseInt(leader.points)-parseInt(myDriver.points)) : '--'}
+  var leader=state.driverStandings[0],myDriver=null;
+  for(var i=0;i<state.driverStandings.length;i++){if(state.driverStandings[i].Driver&&(state.driverStandings[i].Driver.driverId===FAV_DRIVER_ID||state.driverStandings[i].Driver.permanentNumber===FAV_DRIVER_NUM)){myDriver=state.driverStandings[i];break;}}
+  var conLeader=state.conStandings[0];
+  var now=Date.now(),nextRace=null;
+  for(var j=0;j<state.schedule.length;j++){if(new Date(state.schedule[j].date+'T'+(state.schedule[j].time||'14:00:00Z')).getTime()>now){nextRace=state.schedule[j];break;}}
+  var items=[
+    {sym:'HAM',val:'HAMILTON',pts:myDriver?'P'+myDriver.position+' · '+myDriver.points+'pts':'Ferrari'},
+    {sym:'WDC',val:(leader&&leader.Driver&&leader.Driver.familyName?leader.Driver.familyName.toUpperCase():'LEADER'),pts:leader?leader.points+' pts':'--'},
+    {sym:'WCC',val:(conLeader&&conLeader.Constructor&&conLeader.Constructor.name?conLeader.Constructor.name.toUpperCase():'LEADER'),pts:conLeader?conLeader.points+' pts':'--'},
+    {sym:'NEXT',val:(nextRace?nextRace.raceName.replace(' Grand Prix','').toUpperCase():'TBA'),pts:(nextRace?new Date(nextRace.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'}):'--')},
+    {sym:'F1 '+SEASON,val:'PIT WALL',pts:'LIVE DATA'},
+    {sym:'GAP',val:'HAM TO P1',pts:(leader&&myDriver?'-'+(parseInt(leader.points)-parseInt(myDriver.points)):'--')}
   ];
-  var mk = function(it){ return '<span class="tick"><span class="sym">'+it.sym+'</span> <span class="val">'+it.val+'</span> <span class="pts">'+it.pts+'</span></span><span class="tick tick-dot">◆</span>'; };
-  var half = items.map(mk).join('');
-  document.getElementById('tkTrack').innerHTML = half + half;
+  var mk=function(it){return '<span class="tick"><span class="sym">'+it.sym+'</span> <span class="val">'+it.val+'</span> <span class="pts">'+it.pts+'</span></span><span class="tick tick-dot">◆</span>';};
+  var half=items.map(mk).join('');
+  el('tkTrack').innerHTML=half+half;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    RENDER: LIVE TAB
-═══════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function renderLiveTab(){
-  /* Last race */
-  var race = state.lastRaceResults;
-  if(race && race.Results){
-    var titleEl = document.getElementById('liveLastRaceTitle');
-    var subEl   = document.getElementById('liveLastRaceSub');
-    if(titleEl) titleEl.innerHTML = (race.raceName||'Last Race').replace('Grand Prix','<em>Grand Prix</em>');
-    if(subEl)   subEl.textContent = ((race.Circuit && race.Circuit.Location && race.Circuit.Location.locality)||'') + ' · ' + new Date(race.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-    var podWrap = document.getElementById('liveLastRacePodium');
-    if(podWrap){
-      podWrap.innerHTML = race.Results.slice(0,5).map(function(r,i){
-        var posClass = ['gold','silver','bronze','',''][i]||'';
-        var timeStr  = i===0 ? ((r.Time&&r.Time.time)||'') : ('+'+((r.Time&&r.Time.time)||(r.status||'')));
-        return '<div class="live-pod-row">' +
-          '<div class="live-pod-pos ' + posClass + '">P' + r.position + '</div>' +
-          '<div><div class="live-pod-driver">' + ((r.Driver&&r.Driver.givenName&&r.Driver.givenName.charAt(0))||'') + '. ' + ((r.Driver&&r.Driver.familyName)||'') + '</div>' +
-          '<div class="live-pod-team">' + ((r.Constructor&&r.Constructor.name)||'') + '</div></div>' +
-          '<div class="live-pod-time">' + timeStr + '</div></div>';
-      }).join('');
-    }
-  }
-
-  /* Next race countdown (already started in renderNextRace) */
-
-  /* WDC snapshot */
-  var snapBody = document.getElementById('liveStandingsSnap');
-  if(snapBody && state.driverStandings.length){
-    var ld = state.driverStandings[0];
-    snapBody.innerHTML = state.driverStandings.slice(0,6).map(function(ds,i){
-      var d = ds.Driver, c = ds.Constructors && ds.Constructors[0];
-      var tc = teamColor(c && c.constructorId);
-      var isMine = d && (d.driverId===FAV_DRIVER_ID || d.permanentNumber===FAV_DRIVER_NUM);
-      var gap = i>0 ? '-'+(parseInt(ld.points)-parseInt(ds.points)) : 'Leader';
-      return '<tr class="' + (isMine?'my-driver-live':'') + '">' +
-        '<td><span class="live-pos-num ' + (i===0?'p1':'') + '">' + (i+1) + '</span></td>' +
-        '<td class="live-dname"><span class="live-team-dot" style="background:' + tc + '"></span>' + ((d&&d.givenName&&d.givenName.charAt(0))||'') + '. ' + ((d&&d.familyName)||'') + '</td>' +
-        '<td>' + ds.points + '</td>' +
-        '<td class="live-gap">' + gap + '</td></tr>';
+  var race=state.lastRaceResults;
+  if(race&&race.Results){
+    var tEl=el('liveLastRaceTitle'); if(tEl) tEl.innerHTML=(race.raceName||'Last Race').replace('Grand Prix','<em>Grand Prix</em>');
+    var sEl=el('liveLastRaceSub'); if(sEl) sEl.textContent=((race.Circuit&&race.Circuit.Location&&race.Circuit.Location.locality)||'')+' · '+new Date(race.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+    var pw=el('liveLastRacePodium');
+    if(pw) pw.innerHTML=race.Results.slice(0,5).map(function(r,i){
+      var pc=['gold','silver','bronze','',''][i]||'';
+      var ts=i===0?((r.Time&&r.Time.time)||''):('+'+((r.Time&&r.Time.time)||(r.status||'')));
+      return '<div class="live-pod-row"><div class="live-pod-pos '+pc+'">P'+r.position+'</div>'+
+        '<div><div class="live-pod-driver">'+((r.Driver&&r.Driver.givenName&&r.Driver.givenName.charAt(0))||'')+'. '+((r.Driver&&r.Driver.familyName)||'')+'</div>'+
+        '<div class="live-pod-team">'+((r.Constructor&&r.Constructor.name)||'')+'</div></div>'+
+        '<div class="live-pod-time">'+ts+'</div></div>';
     }).join('');
   }
-
-  /* Latest session placeholder */
-  var liveBody = document.getElementById('latestPositionsBody');
-  if(liveBody){
-    liveBody.innerHTML = '<tr><td colspan="4" style="padding:24px;color:rgba(255,255,255,.35);font-family:\'JetBrains Mono\',monospace;font-size:10px;text-align:center">' +
-      'No active session. Live timing during race weekends at <strong style="color:var(--gold)">formula1.com/live</strong></td></tr>';
+  /* WDC snap */
+  var sb=el('liveStandingsSnap');
+  if(sb&&state.driverStandings.length){
+    var ld=state.driverStandings[0];
+    sb.innerHTML=state.driverStandings.slice(0,6).map(function(ds,i){
+      var d=ds.Driver,c=ds.Constructors&&ds.Constructors[0],tc=teamColor(c&&c.constructorId);
+      var isMine=d&&(d.driverId===FAV_DRIVER_ID||d.permanentNumber===FAV_DRIVER_NUM);
+      return '<tr class="'+(isMine?'my-driver-live':'')+'"><td><span class="live-pos-num '+(i===0?'p1':'')+'">'+( i+1)+'</span></td>'+
+        '<td class="live-dname"><span class="live-team-dot" style="background:'+tc+'"></span>'+((d&&d.givenName&&d.givenName.charAt(0))||'')+'. '+((d&&d.familyName)||'')+'</td>'+
+        '<td>'+ds.points+'</td><td class="live-gap">'+(i===0?'Leader':'-'+(parseInt(ld.points)-parseInt(ds.points)))+'</td></tr>';
+    }).join('');
   }
-
-  /* Session badge */
-  var badge = document.getElementById('liveSessionBadge');
-  if(badge){ badge.className='live-session-badge session-idle'; badge.textContent='No Active Session'; }
+  /* WCC snap */
+  var cb=el('liveConSnap');
+  if(cb&&state.conStandings.length){
+    var cl=state.conStandings[0];
+    cb.innerHTML=state.conStandings.slice(0,6).map(function(cs,i){
+      var c=cs.Constructor,tc=teamColor(c&&c.constructorId);
+      var isMine=c&&c.constructorId&&c.constructorId.indexOf(FAV_TEAM_ID)!==-1;
+      return '<tr class="'+(isMine?'my-driver-live':'')+'"><td><span class="live-pos-num '+(i===0?'p1':'')+'">'+( i+1)+'</span></td>'+
+        '<td class="live-dname"><span class="live-team-dot" style="background:'+tc+'"></span>'+((c&&c.name)||'')+'</td>'+
+        '<td>'+cs.points+'</td><td class="live-gap">'+(i===0?'Leader':'-'+(parseInt(cl.points)-parseInt(cs.points)))+'</td></tr>';
+    }).join('');
+  }
+  var badge=el('liveSessionBadge');
+  if(badge){badge.className='live-session-badge session-idle';badge.textContent='No Active Session';}
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ANALYTICS
-═══════════════════════════════════════════════════════════════ */
-var analyticsRendered = false;
+/* ═══════════════════════════════════════════════════════════
+   ANALYTICS FUNCTIONS
+═══════════════════════════════════════════════════════════ */
+var analyticsRendered=false;
 function renderAnalytics(){
-  if(analyticsRendered) return;
-  analyticsRendered = true;
+  if(analyticsRendered)return;
+  analyticsRendered=true;
   renderMiniStats();
   renderLineChart();
   renderWCC();
   renderHamRound();
+  renderPitStopChart();
+  renderWinRateChart();
+  renderPodiumDistChart();
+  renderPointsPerRaceChart();
+  renderDNFChart();
+  renderPosGainChart();
   renderHeatmap();
 }
 
 function renderMiniStats(){
-  var myDriver = null;
+  var myDriver=null;
   for(var i=0;i<state.driverStandings.length;i++){
-    var d=state.driverStandings[i];
-    if(d.Driver && (d.Driver.driverId===FAV_DRIVER_ID || d.Driver.permanentNumber===FAV_DRIVER_NUM)){ myDriver=d; break; }
+    if(state.driverStandings[i].Driver&&(state.driverStandings[i].Driver.driverId===FAV_DRIVER_ID||state.driverStandings[i].Driver.permanentNumber===FAV_DRIVER_NUM)){myDriver=state.driverStandings[i];break;}
   }
-  var leader   = state.driverStandings[0];
-  var myTeam   = null;
+  var leader=state.driverStandings[0],conLeader=state.conStandings[0],myTeam=null;
   for(var j=0;j<state.conStandings.length;j++){
-    var c=state.conStandings[j];
-    if(c.Constructor && c.Constructor.constructorId && c.Constructor.constructorId.includes(FAV_TEAM_ID)){ myTeam=c; break; }
+    if(state.conStandings[j].Constructor&&state.conStandings[j].Constructor.constructorId&&state.conStandings[j].Constructor.constructorId.indexOf(FAV_TEAM_ID)!==-1){myTeam=state.conStandings[j];break;}
   }
-  var conLeader = state.conStandings[0];
-  var hamRes = [];
+  var hamRes=[];
   Object.keys(state.raceResultsPerRound).forEach(function(rnd){
-    var res = state.raceResultsPerRound[rnd];
-    for(var k=0;k<res.length;k++){
-      if(res[k].Driver && (res[k].Driver.driverId===FAV_DRIVER_ID || res[k].Driver.permanentNumber===FAV_DRIVER_NUM)){ hamRes.push(res[k]); break; }
-    }
+    var res=state.raceResultsPerRound[rnd];
+    for(var k=0;k<res.length;k++){if(res[k].Driver&&(res[k].Driver.driverId===FAV_DRIVER_ID||res[k].Driver.permanentNumber===FAV_DRIVER_NUM)){hamRes.push(res[k]);break;}}
   });
-  var avgPos = hamRes.length ? Math.round(hamRes.reduce(function(a,r){ return a+parseInt(r.position); },0)/hamRes.length) : 0;
-  var stats = [
-    {lbl:'Hamilton · Points', val:myDriver?myDriver.points:'--', cls:'y', sub:'P'+(myDriver?myDriver.position:'--')+' in WDC'},
-    {lbl:'Gap to Leader',     val:(leader&&myDriver)?'- '+(parseInt(leader.points)-parseInt(myDriver.points)):'--', cls:'r', sub:'vs '+(leader&&leader.Driver&&leader.Driver.familyName||'')},
-    {lbl:'Ferrari vs Leader', val:(conLeader&&myTeam)?'- '+(parseInt(conLeader.points)-parseInt(myTeam.points)):'--', cls:'', sub:'WCC deficit'},
-    {lbl:'HAM Avg Finish',    val:avgPos?'P'+avgPos:'--', cls:'y', sub:'Across '+hamRes.length+' rounds'}
+  var avgPos=hamRes.length?Math.round(hamRes.reduce(function(a,r){return a+parseInt(r.position);},0)/hamRes.length*10)/10:0;
+  var numRaces=Object.keys(state.raceResultsPerRound).length;
+  var hamPPR=numRaces&&myDriver?Math.round(parseInt(myDriver.points)/numRaces*10)/10:0;
+  var sub=el('analyticsSub');
+  if(sub) sub.textContent=SEASON+' F1 Season · After Round '+numRaces+' · '+(state.apiOk?'Live API data':'Fallback data — refreshes after races');
+  var stats=[
+    {lbl:'Hamilton Points',val:myDriver?myDriver.points:'--',cls:'y',sub:'P'+(myDriver?myDriver.position:'--')+' Championship'},
+    {lbl:'Gap to Leader',val:(leader&&myDriver)?'- '+(parseInt(leader.points)-parseInt(myDriver.points)):'--',cls:'r',sub:'vs '+(leader&&leader.Driver&&leader.Driver.familyName||'')},
+    {lbl:'Ferrari WCC Gap',val:(conLeader&&myTeam)?'- '+(parseInt(conLeader.points)-parseInt(myTeam.points)):'--',cls:'',sub:'P'+(myTeam?myTeam.position:'--')+' WCC'},
+    {lbl:'HAM Avg Finish',val:avgPos?'P'+avgPos:'--',cls:'y',sub:'Across '+hamRes.length+' races'},
+    {lbl:'HAM Pts/Race',val:hamPPR||'--',cls:'y',sub:'Efficiency rating'},
+    {lbl:'Fastest Pit Stop',val:'1.94s',cls:'',sub:'McLaren · Japan GP'},
+    {lbl:'WCC Leader',val:(conLeader&&conLeader.Constructor&&conLeader.Constructor.name)||'--',cls:'',sub:(conLeader?conLeader.points+' pts':'')},
+    {lbl:'Rounds Remaining',val:String(state.schedule.length-numRaces),cls:'',sub:'of '+state.schedule.length+' total'}
   ];
-  document.getElementById('miniStats').innerHTML = stats.map(function(s){
+  el('miniStats').innerHTML=stats.map(function(s){
     return '<div class="mini-card"><div class="mini-lbl">'+s.lbl+'</div><div class="mini-val '+s.cls+'">'+s.val+'</div><div class="mini-sub">'+s.sub+'</div></div>';
   }).join('');
 }
 
 function renderLineChart(){
-  var top5 = state.driverStandings.slice(0,5);
-  var rounds = Object.keys(state.raceResultsPerRound).map(Number).sort(function(a,b){return a-b;});
-  if(!rounds.length || !top5.length){
-    document.getElementById('lineChartWrap').innerHTML = '<div style="padding:20px;color:rgba(255,255,255,.3);font-family:monospace;font-size:10px">No data yet</div>';
-    return;
-  }
-  var W=700, H=320, pad={t:20,r:140,b:55,l:50};
-  var driverPts = top5.map(function(ds){
-    var isMine = ds.Driver && (ds.Driver.driverId===FAV_DRIVER_ID || ds.Driver.permanentNumber===FAV_DRIVER_NUM);
-    var tc = teamColor(ds.Constructors && ds.Constructors[0] && ds.Constructors[0].constructorId);
-    var color = isMine ? '#FFCC00' : tc;
-    var cum = [0];
+  var top5=state.driverStandings.slice(0,5);
+  var rounds=Object.keys(state.raceResultsPerRound).map(Number).sort(function(a,b){return a-b;});
+  if(!rounds.length||!top5.length){el('lineChartWrap').innerHTML='<div style="padding:20px;color:rgba(255,255,255,.3);font-family:monospace;font-size:10px">No data yet</div>';return;}
+  var W=700,H=320,pad={t:20,r:140,b:55,l:50};
+  var driverPts=top5.map(function(ds){
+    var isMine=ds.Driver&&(ds.Driver.driverId===FAV_DRIVER_ID||ds.Driver.permanentNumber===FAV_DRIVER_NUM);
+    var tc=teamColor(ds.Constructors&&ds.Constructors[0]&&ds.Constructors[0].constructorId);
+    var color=isMine?'#FFCC00':tc;
+    var cum=[0];
     for(var ri=0;ri<rounds.length;ri++){
-      var rnd = rounds[ri];
-      var res = state.raceResultsPerRound[rnd] || [];
-      var pts = 0;
-      for(var j=0;j<res.length;j++){
-        if(res[j].Driver && (res[j].Driver.driverId === (ds.Driver&&ds.Driver.driverId) || res[j].Driver.permanentNumber===(ds.Driver&&ds.Driver.permanentNumber))){
-          pts = parseInt(res[j].points||0); break;
-        }
-      }
-      cum.push(cum[cum.length-1] + pts);
+      var rnd=rounds[ri],res=state.raceResultsPerRound[rnd]||[],pts=0;
+      for(var j=0;j<res.length;j++){if(res[j].Driver&&(res[j].Driver.driverId===(ds.Driver&&ds.Driver.driverId)||res[j].Driver.permanentNumber===(ds.Driver&&ds.Driver.permanentNumber))){pts=parseInt(res[j].points||0);break;}}
+      cum.push(cum[cum.length-1]+pts);
     }
-    return {name:(ds.Driver&&ds.Driver.code)||'?', isMine:isMine, color:color, lw:isMine?3:1.5, cum:cum.slice(1)};
+    return {name:(ds.Driver&&ds.Driver.code)||'?',isMine:isMine,color:color,lw:isMine?3:1.5,cum:cum.slice(1)};
   });
-  var maxPts = Math.max(1, Math.max.apply(null, driverPts.map(function(d){ return d.cum.length ? d.cum[d.cum.length-1] : 0; })));
-  maxPts = Math.max(maxPts, 20);
-  var labels = ['Pre'].concat(rounds.map(function(r){
-    var race = null;
-    for(var i=0;i<state.schedule.length;i++){ if(state.schedule[i].round == r){ race=state.schedule[i]; break; } }
-    return (race && race.Circuit && race.Circuit.Location && race.Circuit.Location.locality) ?
-      race.Circuit.Location.locality.substring(0,3).toUpperCase() : 'R'+r;
+  var maxPts=Math.max(20,Math.max.apply(null,driverPts.map(function(d){return d.cum.length?d.cum[d.cum.length-1]:0;})));
+  var labels=['Pre'].concat(rounds.map(function(r){
+    var race=null;for(var i=0;i<state.schedule.length;i++){if(state.schedule[i].round==r){race=state.schedule[i];break;}}
+    return race&&race.Circuit&&race.Circuit.Location&&race.Circuit.Location.locality?race.Circuit.Location.locality.substring(0,3).toUpperCase():'R'+r;
   }));
-  function xS(i){ return pad.l + (W-pad.l-pad.r)*i/Math.max(rounds.length,1); }
-  function yS(v){ return H-pad.b - (H-pad.t-pad.b)*v/maxPts; }
-  var svg = svgEl('svg',{viewBox:'0 0 '+W+' '+H});
+  function xS(i){return pad.l+(W-pad.l-pad.r)*i/Math.max(rounds.length,1);}
+  function yS(v){return H-pad.b-(H-pad.t-pad.b)*v/maxPts;}
+  var svg=svgEl('svg',{viewBox:'0 0 '+W+' '+H});
   [0,25,50,75,100,125].filter(function(v){return v<=maxPts+10;}).forEach(function(v){
     var y=yS(v);
     svg.appendChild(svgEl('line',{x1:pad.l,y1:y,x2:W-pad.r,y2:y,stroke:'rgba(255,255,255,.07)','stroke-width':'1'}));
@@ -1764,145 +1760,307 @@ function renderLineChart(){
     svg.appendChild(svgEl('line',{x1:x,y1:pad.t,x2:x,y2:H-pad.b,stroke:'rgba(255,255,255,.06)','stroke-width':'1'}));
     svg.appendChild(svgEl('text',{x:x,y:H-pad.b+16,'text-anchor':'middle','font-family':'JetBrains Mono, monospace','font-size':'9','fill':'rgba(255,255,255,.45)'},lb));
   });
-  var legendHtml = '';
-  driverPts.forEach(function(d, di){
-    var pts = [0].concat(d.cum);
-    var points = pts.map(function(v,i){ return {x:xS(i),y:yS(v)}; });
-    var pathD = points.map(function(p,i){ return (i===0?'M':'L')+' '+p.x+' '+p.y; }).join(' ');
-    var len = points.reduce(function(acc,p,i){ return i===0?0:acc+Math.sqrt(Math.pow(p.x-points[i-1].x,2)+Math.pow(p.y-points[i-1].y,2)); },0);
+  var legHtml='';
+  driverPts.forEach(function(d,di){
+    var pts=[0].concat(d.cum);
+    var points=pts.map(function(v,i){return{x:xS(i),y:yS(v)};});
+    var pathD=points.map(function(p,i){return (i===0?'M':'L')+' '+p.x+' '+p.y;}).join(' ');
+    var len=points.reduce(function(acc,p,i){return i===0?0:acc+Math.sqrt(Math.pow(p.x-points[i-1].x,2)+Math.pow(p.y-points[i-1].y,2));},0);
     svg.appendChild(svgEl('path',{d:pathD,fill:'none',stroke:d.color,'stroke-width':String(d.lw),'stroke-linecap':'round','stroke-linejoin':'round',
       style:'stroke-dasharray:'+len+';stroke-dashoffset:'+len+';animation:drawLine 1.8s cubic-bezier(.4,0,.2,1) '+(di*0.2)+'s forwards'}));
     points.slice(1).forEach(function(p,i){
       svg.appendChild(svgEl('circle',{cx:p.x,cy:p.y,r:String(d.lw===3?5:3),fill:d.color,style:'opacity:0;animation:fadeIn .3s ease '+(di*0.2+i*0.3+0.5)+'s forwards'}));
     });
-    var last = points[points.length-1];
-    svg.appendChild(svgEl('text',{x:last.x+8,y:last.y+4,'font-family':'JetBrains Mono, monospace','font-size':'10','fill':d.color,'font-weight':d.isMine?'700':'400'},
-      d.name + ' ' + (d.cum.length ? d.cum[d.cum.length-1] : 0)));
-    legendHtml += '<div class="legend-item '+(d.isMine?'my':'')+'"><div class="legend-dot" style="background:'+d.color+'"></div>'+d.name+(d.isMine?' ★':'')+'</div>';
+    var last=points[points.length-1];
+    svg.appendChild(svgEl('text',{x:last.x+8,y:last.y+4,'font-family':'JetBrains Mono, monospace','font-size':'10','fill':d.color,'font-weight':d.isMine?'700':'400'},d.name+' '+(d.cum.length?d.cum[d.cum.length-1]:0)));
+    legHtml+='<div class="legend-item '+(d.isMine?'my':'')+'"><div class="legend-dot" style="background:'+d.color+'"></div>'+d.name+(d.isMine?' ★':'')+'</div>';
   });
-  var wrap = document.getElementById('lineChartWrap');
-  if(wrap){ wrap.innerHTML=''; wrap.appendChild(svg); }
-  var leg = document.getElementById('lineLegend');
-  if(leg) leg.innerHTML = legendHtml;
+  var w=el('lineChartWrap'); if(w){w.innerHTML='';w.appendChild(svg);}
+  var lg=el('lineLegend'); if(lg) lg.innerHTML=legHtml;
 }
 
 function renderWCC(){
-  if(!state.conStandings.length){
-    document.getElementById('wccChartWrap').innerHTML='<div style="padding:20px;color:rgba(255,255,255,.3);font-family:monospace;font-size:10px">No data</div>';
-    return;
-  }
-  var W=440, rowH=32, pad={l:110,r:60,t:8};
-  var maxPts = Math.max(1, Math.max.apply(null, state.conStandings.map(function(c){ return parseInt(c.points)||0; })));
-  var H = state.conStandings.length * rowH + pad.t + 10;
-  var svg = svgEl('svg',{viewBox:'0 0 '+W+' '+H});
+  if(!state.conStandings.length){el('wccChartWrap').innerHTML='<div style="padding:20px;color:rgba(255,255,255,.3);font-family:monospace;font-size:10px">No data</div>';return;}
+  var W=440,rowH=32,pad={l:110,r:60,t:8};
+  var maxPts=Math.max(1,Math.max.apply(null,state.conStandings.map(function(c){return parseInt(c.points)||0;})));
+  var H=state.conStandings.length*rowH+pad.t+10;
+  var svg=svgEl('svg',{viewBox:'0 0 '+W+' '+H});
   state.conStandings.forEach(function(cs,i){
-    var c=cs.Constructor, tc=teamColor(c&&c.constructorId);
-    var pts=parseInt(cs.points)||0;
-    var barW=(W-pad.l-pad.r)*pts/maxPts;
-    var y=pad.t+i*rowH;
-    var isF = c && c.constructorId && c.constructorId.includes(FAV_TEAM_ID);
-    var name = c ? (c.name||'').substring(0,14)+(isF?' ★':'') : '';
-    svg.appendChild(svgEl('text',{x:pad.l-6,y:y+18,'text-anchor':'end','font-family':isF?'Bebas Neue, serif':'JetBrains Mono, monospace','font-size':isF?'14':'11','fill':isF?'#FFCC00':'rgba(255,255,255,.65)'},name));
-    svg.appendChild(svgEl('rect',{x:pad.l,y:y+6,width:String(Math.max(barW,0)),height:'18',fill:tc,rx:'2','opacity':isF?'1':'.8',
-      style:'transform-origin:'+pad.l+'px '+(y+6)+'px;animation:barGrow 1.2s cubic-bezier(.3,.9,.3,1) '+(i*0.08)+'s both'}));
+    var c=cs.Constructor,tc=teamColor(c&&c.constructorId),pts=parseInt(cs.points)||0;
+    var barW=(W-pad.l-pad.r)*pts/maxPts,y=pad.t+i*rowH;
+    var isF=c&&c.constructorId&&c.constructorId.indexOf(FAV_TEAM_ID)!==-1;
+    svg.appendChild(svgEl('text',{x:pad.l-6,y:y+18,'text-anchor':'end','font-family':isF?'Bebas Neue, serif':'JetBrains Mono, monospace','font-size':isF?'14':'11','fill':isF?'#FFCC00':'rgba(255,255,255,.65)'},((c&&c.name)||'').substring(0,14)+(isF?' ★':'')));
+    svg.appendChild(svgEl('rect',{x:pad.l,y:y+6,width:String(Math.max(barW,0)),height:'18',fill:tc,rx:'2','opacity':isF?'1':'.8',style:'transform-origin:'+pad.l+'px '+(y+6)+'px;animation:barGrow 1.2s cubic-bezier(.3,.9,.3,1) '+(i*0.08)+'s both'}));
     if(pts>0) svg.appendChild(svgEl('text',{x:pad.l+barW+5,y:y+18,'font-family':'JetBrains Mono, monospace','font-size':'11','fill':isF?'#FFCC00':'rgba(255,255,255,.7)','font-weight':'700'},String(pts)));
   });
-  var wrap = document.getElementById('wccChartWrap');
-  if(wrap){ wrap.innerHTML=''; wrap.appendChild(svg); }
+  var w=el('wccChartWrap'); if(w){w.innerHTML='';w.appendChild(svg);}
 }
 
 function renderHamRound(){
-  var hamRounds = [];
-  Object.keys(state.raceResultsPerRound).forEach(function(rnd){
-    var res = state.raceResultsPerRound[rnd];
+  var hamRounds=[];
+  Object.keys(state.raceResultsPerRound).sort(function(a,b){return parseInt(a)-parseInt(b);}).forEach(function(rnd){
+    var res=state.raceResultsPerRound[rnd];
     for(var j=0;j<res.length;j++){
-      if(res[j].Driver && (res[j].Driver.driverId===FAV_DRIVER_ID || res[j].Driver.permanentNumber===FAV_DRIVER_NUM)){
-        var race=null;
-        for(var k=0;k<state.schedule.length;k++){ if(state.schedule[k].round==rnd){ race=state.schedule[k]; break; } }
+      if(res[j].Driver&&(res[j].Driver.driverId===FAV_DRIVER_ID||res[j].Driver.permanentNumber===FAV_DRIVER_NUM)){
+        var race=null;for(var k=0;k<state.schedule.length;k++){if(state.schedule[k].round==rnd){race=state.schedule[k];break;}}
         var loc=(race&&race.Circuit&&race.Circuit.Location&&race.Circuit.Location.locality)||('R'+rnd);
         hamRounds.push({rnd:parseInt(rnd),label:loc.substring(0,3).toUpperCase(),pos:parseInt(res[j].position),pts:parseInt(res[j].points||0)});
         break;
       }
     }
   });
-  hamRounds.sort(function(a,b){return a.rnd-b.rnd;});
-  if(!hamRounds.length){ document.getElementById('hamRoundWrap').innerHTML='<div style="padding:20px;color:rgba(255,255,255,.3);font-family:monospace;font-size:10px">No race data yet</div>'; return; }
-  var W=380, H=260, pad={t:20,r:20,b:60,l:40};
-  var maxPos = Math.max(10, Math.max.apply(null, hamRounds.map(function(r){return r.pos;})));
-  var xW = (W-pad.l-pad.r)/hamRounds.length;
-  function yS(v){ return pad.t+(H-pad.t-pad.b)*(v-1)/(maxPos-1+0.1); }
-  var svg = svgEl('svg',{viewBox:'0 0 '+W+' '+H});
+  if(!hamRounds.length){el('hamRoundWrap').innerHTML='<div style="padding:20px;color:rgba(255,255,255,.3);font-family:monospace;font-size:10px">No data yet</div>';return;}
+  var W=380,H=260,pad={t:20,r:20,b:60,l:40};
+  var maxPos=Math.max(10,Math.max.apply(null,hamRounds.map(function(r){return r.pos;})));
+  var xW=(W-pad.l-pad.r)/hamRounds.length;
+  function yS(v){return pad.t+(H-pad.t-pad.b)*(v-1)/(maxPos-1+0.1);}
+  var svg=svgEl('svg',{viewBox:'0 0 '+W+' '+H});
   for(var p=1;p<=maxPos;p+=Math.ceil(maxPos/5)){
     var y=yS(p);
     svg.appendChild(svgEl('line',{x1:pad.l,y1:y,x2:W-pad.r,y2:y,stroke:'rgba(255,255,255,.06)','stroke-width':'1'}));
     svg.appendChild(svgEl('text',{x:pad.l-5,y:y+4,'text-anchor':'end','font-family':'JetBrains Mono, monospace','font-size':'9','fill':'rgba(255,255,255,.35)'},'P'+p));
   }
   hamRounds.forEach(function(r,i){
-    var cx=pad.l+xW*i+xW/2, ry=yS(r.pos);
-    var fill=r.pos<=3?'#FFCC00':'#DC0000';
+    var cx=pad.l+xW*i+xW/2,ry=yS(r.pos),fill=r.pos<=3?'#FFCC00':'#DC0000';
     svg.appendChild(svgEl('circle',{cx:cx,cy:ry,r:'9',fill:fill}));
     svg.appendChild(svgEl('text',{x:cx,y:ry+4,'text-anchor':'middle','font-family':'Bebas Neue, serif','font-size':'12','fill':'#000','font-weight':'bold'},String(r.pos)));
     svg.appendChild(svgEl('text',{x:cx,y:H-pad.b+14,'text-anchor':'middle','font-family':'JetBrains Mono, monospace','font-size':'9','fill':'rgba(255,255,255,.5)'},r.label));
     svg.appendChild(svgEl('text',{x:cx,y:H-pad.b+26,'text-anchor':'middle','font-family':'JetBrains Mono, monospace','font-size':'8','fill':'#FFCC00'},'+'+r.pts));
   });
-  var wrap = document.getElementById('hamRoundWrap');
-  if(wrap){ wrap.innerHTML=''; wrap.appendChild(svg); }
+  var w=el('hamRoundWrap'); if(w){w.innerHTML='';w.appendChild(svg);}
+}
+
+/* ── PIT STOP CHART ── */
+function renderPitStopChart(){
+  var teams=Object.keys(state.pitStops).map(function(k){return{id:k,name:state.conStandings.find(function(c){return c.Constructor&&c.Constructor.constructorId&&c.Constructor.constructorId.indexOf(k)!==-1;}),data:state.pitStops[k]};});
+  teams=teams.filter(function(t){return t.data;}).sort(function(a,b){return a.data.fastest-b.data.fastest;});
+  var W=760,rowH=48,pad={l:120,r:80,t:10,b:20};
+  var H=teams.length*rowH+pad.t+pad.b;
+  var maxAvg=Math.max.apply(null,teams.map(function(t){return t.data.avg;}));
+  var svg=svgEl('svg',{viewBox:'0 0 '+W+' '+H});
+  teams.forEach(function(t,i){
+    var y=pad.t+i*rowH;
+    var tc=teamColor(t.id);
+    var cname=(t.name&&t.name.Constructor&&t.name.Constructor.name)||t.id.replace(/_/g,' ');
+    var isF=t.id.indexOf(FAV_TEAM_ID)!==-1;
+    var fastW=(W-pad.l-pad.r)*t.data.fastest/maxAvg;
+    var avgW=(W-pad.l-pad.r)*t.data.avg/maxAvg;
+    /* name */
+    svg.appendChild(svgEl('text',{x:pad.l-8,y:y+20,'text-anchor':'end','font-family':isF?'Bebas Neue, serif':'JetBrains Mono, monospace','font-size':isF?'14':'10','fill':isF?'#FFCC00':'rgba(255,255,255,.7)'},cname.substring(0,12)+(isF?' ★':'')));
+    /* avg bar (background) */
+    svg.appendChild(svgEl('rect',{x:pad.l,y:y+8,width:String(Math.max(avgW,0)),height:'20',fill:tc,rx:'2','opacity':'.3',style:'transform-origin:'+pad.l+'px '+(y+8)+'px;animation:barGrow 1.2s cubic-bezier(.3,.9,.3,1) '+(i*0.07)+'s both'}));
+    /* fastest bar (foreground) */
+    svg.appendChild(svgEl('rect',{x:pad.l,y:y+10,width:String(Math.max(fastW,0)),height:'16',fill:tc,rx:'2',style:'transform-origin:'+pad.l+'px '+(y+10)+'px;animation:barGrow 1.2s cubic-bezier(.3,.9,.3,1) '+(i*0.07+0.1)+'s both'}));
+    /* fastest label */
+    svg.appendChild(svgEl('text',{x:pad.l+fastW+6,y:y+22,'font-family':'JetBrains Mono, monospace','font-size':'11','fill':'#fff','font-weight':'700'},t.data.fastest.toFixed(2)+'s'));
+    /* avg label */
+    svg.appendChild(svgEl('text',{x:pad.l+avgW+6,y:y+34,'font-family':'JetBrains Mono, monospace','font-size':'9','fill':'rgba(255,255,255,.5)'},'avg '+t.data.avg.toFixed(2)+'s'));
+    /* stops badge */
+    svg.appendChild(svgEl('text',{x:W-pad.r+8,y:y+22,'font-family':'JetBrains Mono, monospace','font-size':'10','fill':'rgba(255,255,255,.4)'},t.data.total+' stops'));
+  });
+  /* legend */
+  var lg=svgEl('text',{x:pad.l,y:H-2,'font-family':'JetBrains Mono, monospace','font-size':'9','fill':'rgba(255,255,255,.3)'},'■ Fastest stop   ░ Season average   Sorted by fastest');
+  svg.appendChild(lg);
+  var w=el('pitStopWrap'); if(w){w.innerHTML='';w.appendChild(svg);}
+}
+
+/* ── WIN RATE CHART ── */
+function renderWinRateChart(){
+  var numRaces=Object.keys(state.raceResultsPerRound).length||1;
+  var winners=state.driverStandings.filter(function(ds){return parseInt(ds.wins||0)>0;}).slice(0,8);
+  if(!winners.length){el('winRateWrap').innerHTML='<div style="padding:20px;color:rgba(255,255,255,.3);font-family:monospace;font-size:10px">No wins yet</div>';return;}
+  var W=400,rowH=38,pad={l:80,r:70,t:10,b:10};
+  var H=winners.length*rowH+pad.t+pad.b;
+  var svg=svgEl('svg',{viewBox:'0 0 '+W+' '+H});
+  winners.forEach(function(ds,i){
+    var d=ds.Driver,c=ds.Constructors&&ds.Constructors[0],tc=teamColor(c&&c.constructorId);
+    var wins=parseInt(ds.wins||0), pct=Math.round(wins/numRaces*100);
+    var barW=(W-pad.l-pad.r)*pct/100;
+    var y=pad.t+i*rowH;
+    var isMine=d&&(d.driverId===FAV_DRIVER_ID||d.permanentNumber===FAV_DRIVER_NUM);
+    svg.appendChild(svgEl('text',{x:pad.l-6,y:y+22,'text-anchor':'end','font-family':'JetBrains Mono, monospace','font-size':'11','fill':isMine?'#FFCC00':'rgba(255,255,255,.7)'},((d&&d.code)||'???')));
+    svg.appendChild(svgEl('rect',{x:pad.l,y:y+8,width:String(Math.max(barW,0)),height:'22',fill:tc,rx:'2',style:'transform-origin:'+pad.l+'px '+(y+8)+'px;animation:barGrow 1.1s cubic-bezier(.3,.9,.3,1) '+(i*0.1)+'s both'}));
+    svg.appendChild(svgEl('text',{x:pad.l+barW+6,y:y+24,'font-family':'JetBrains Mono, monospace','font-size':'11','fill':'#fff','font-weight':'700'},pct+'% ('+wins+'W)'));
+  });
+  var w=el('winRateWrap'); if(w){w.innerHTML='';w.appendChild(svg);}
+}
+
+/* ── PODIUM DISTRIBUTION ── */
+function renderPodiumDistChart(){
+  var numRaces=Object.keys(state.raceResultsPerRound).length;
+  var driverPodiums={};
+  Object.keys(state.raceResultsPerRound).forEach(function(rnd){
+    var res=state.raceResultsPerRound[rnd];
+    res.slice(0,3).forEach(function(r){
+      var key=(r.Driver&&r.Driver.code)||'???';
+      if(!driverPodiums[key]) driverPodiums[key]={code:key,tc:teamColor(r.Constructor&&r.Constructor.constructorId),p1:0,p2:0,p3:0};
+      var pos=parseInt(r.position);
+      if(pos===1) driverPodiums[key].p1++;
+      else if(pos===2) driverPodiums[key].p2++;
+      else if(pos===3) driverPodiums[key].p3++;
+    });
+  });
+  var drivers=Object.values(driverPodiums).sort(function(a,b){return (b.p1*3+b.p2*2+b.p3)-(a.p1*3+a.p2*2+a.p3);});
+  if(!drivers.length){el('podiumDistWrap').innerHTML='<div style="padding:20px;color:rgba(255,255,255,.3);font-family:monospace;font-size:10px">No data yet</div>';return;}
+  var W=400,rowH=34,pad={l:50,r:60,t:10,b:10};
+  var H=drivers.length*rowH+pad.t+pad.b,maxPods=Math.max(1,Math.max.apply(null,drivers.map(function(d){return d.p1+d.p2+d.p3;})));
+  var svg=svgEl('svg',{viewBox:'0 0 '+W+' '+H});
+  drivers.forEach(function(d,i){
+    var y=pad.t+i*rowH,barW=(W-pad.l-pad.r);
+    var w1=barW*d.p1/maxPods, w2=barW*d.p2/maxPods, w3=barW*d.p3/maxPods;
+    svg.appendChild(svgEl('text',{x:pad.l-6,y:y+20,'text-anchor':'end','font-family':'JetBrains Mono, monospace','font-size':'11','fill':'rgba(255,255,255,.7)'},d.code));
+    var x=pad.l;
+    if(d.p1>0){svg.appendChild(svgEl('rect',{x:x,y:y+6,width:String(w1),height:'20',fill:'#FFCC00',rx:'2',style:'transform-origin:'+x+'px;animation:barGrow 1s '+(i*0.08)+'s both'}));x+=w1+2;}
+    if(d.p2>0){svg.appendChild(svgEl('rect',{x:x,y:y+6,width:String(w2),height:'20',fill:'#c0c0c0',rx:'2',style:'transform-origin:'+x+'px;animation:barGrow 1s '+(i*0.08+0.1)+'s both'}));x+=w2+2;}
+    if(d.p3>0){svg.appendChild(svgEl('rect',{x:x,y:y+6,width:String(w3),height:'20',fill:'#cd7f32',rx:'2',style:'transform-origin:'+x+'px;animation:barGrow 1s '+(i*0.08+0.2)+'s both'}));x+=w3+2;}
+    svg.appendChild(svgEl('text',{x:x+4,y:y+20,'font-family':'JetBrains Mono, monospace','font-size':'10','fill':'rgba(255,255,255,.6)'},(d.p1?d.p1+'W ':'')+(d.p2?d.p2+'P2 ':'')+(d.p3?d.p3+'P3':'')));
+  });
+  var lx=pad.l;
+  [['P1 Win','#FFCC00'],['P2','#c0c0c0'],['P3','#cd7f32']].forEach(function(item){
+    svg.appendChild(svgEl('rect',{x:lx,y:H-8,width:'10',height:'8',fill:item[1],rx:'1'}));
+    svg.appendChild(svgEl('text',{x:lx+14,y:H-1,'font-family':'JetBrains Mono, monospace','font-size':'9','fill':'rgba(255,255,255,.4)'},item[0]));
+    lx+=60;
+  });
+  var w=el('podiumDistWrap'); if(w){w.innerHTML='';w.appendChild(svg);}
+}
+
+/* ── POINTS PER RACE CHART ── */
+function renderPointsPerRaceChart(){
+  var numRaces=Math.max(Object.keys(state.raceResultsPerRound).length,1);
+  var top10=state.driverStandings.slice(0,10);
+  var W=760,rowH=36,pad={l:110,r:80,t:10,b:10};
+  var H=top10.length*rowH+pad.t+pad.b;
+  var maxPPR=Math.max(1,Math.max.apply(null,top10.map(function(ds){return parseInt(ds.points)/numRaces;})));
+  var svg=svgEl('svg',{viewBox:'0 0 '+W+' '+H});
+  top10.forEach(function(ds,i){
+    var d=ds.Driver,c=ds.Constructors&&ds.Constructors[0],tc=teamColor(c&&c.constructorId);
+    var ppr=parseInt(ds.points)/numRaces,barW=(W-pad.l-pad.r)*ppr/maxPPR;
+    var y=pad.t+i*rowH;
+    var isMine=d&&(d.driverId===FAV_DRIVER_ID||d.permanentNumber===FAV_DRIVER_NUM);
+    svg.appendChild(svgEl('text',{x:pad.l-6,y:y+22,'text-anchor':'end','font-family':'JetBrains Mono, monospace','font-size':'11','fill':isMine?'#FFCC00':'rgba(255,255,255,.7)'},((d&&d.code)||'???')));
+    svg.appendChild(svgEl('rect',{x:pad.l,y:y+8,width:String(Math.max(barW,0)),height:'22',fill:tc,rx:'2','opacity':isMine?'1':'.85',style:'transform-origin:'+pad.l+'px '+(y+8)+'px;animation:barGrow 1.2s cubic-bezier(.3,.9,.3,1) '+(i*0.07)+'s both'}));
+    svg.appendChild(svgEl('text',{x:pad.l+barW+6,y:y+23,'font-family':'JetBrains Mono, monospace','font-size':'11','fill':isMine?'#FFCC00':'#fff','font-weight':isMine?'700':'400'},Math.round(ppr*10)/10+' pts/race'));
+    svg.appendChild(svgEl('text',{x:W-pad.r+8,y:y+23,'font-family':'JetBrains Mono, monospace','font-size':'10','fill':'rgba(255,255,255,.35)'},ds.points+' total'));
+  });
+  var w=el('pprWrap'); if(w){w.innerHTML='';w.appendChild(svg);}
+}
+
+/* ── DNF / RELIABILITY CHART ── */
+function renderDNFChart(){
+  var teamDNF={};
+  Object.keys(state.raceResultsPerRound).forEach(function(rnd){
+    var res=state.raceResultsPerRound[rnd];
+    res.forEach(function(r){
+      var cid=(r.Constructor&&r.Constructor.constructorId)||'unknown';
+      var cname=(r.Constructor&&r.Constructor.name)||cid;
+      if(!teamDNF[cid]) teamDNF[cid]={name:cname,tc:teamColor(cid),fin:0,dnf:0};
+      if(r.status==='Finished'||r.status==='Lapped') teamDNF[cid].fin++;
+      else teamDNF[cid].dnf++;
+    });
+  });
+  var teams=Object.values(teamDNF).sort(function(a,b){return b.dnf-a.dnf;});
+  if(!teams.length){el('dnfWrap').innerHTML='<div style="padding:20px;color:rgba(255,255,255,.3);font-family:monospace;font-size:10px">No data yet</div>';return;}
+  var W=400,rowH=34,pad={l:100,r:20,t:10,b:10};
+  var H=teams.length*rowH+pad.t+pad.b,maxFin=Math.max(1,Math.max.apply(null,teams.map(function(t){return t.fin+t.dnf;})));
+  var svg=svgEl('svg',{viewBox:'0 0 '+W+' '+H});
+  teams.forEach(function(t,i){
+    var y=pad.t+i*rowH,total=t.fin+t.dnf;
+    var wFin=(W-pad.l-pad.r)*t.fin/maxFin, wDNF=(W-pad.l-pad.r)*t.dnf/maxFin;
+    svg.appendChild(svgEl('text',{x:pad.l-6,y:y+20,'text-anchor':'end','font-family':'JetBrains Mono, monospace','font-size':'10','fill':'rgba(255,255,255,.7)'},t.name.substring(0,12)));
+    svg.appendChild(svgEl('rect',{x:pad.l,y:y+7,width:String(Math.max(wFin,0)),height:'18',fill:t.tc,rx:'2','opacity':'.9',style:'transform-origin:'+pad.l+'px;animation:barGrow 1s '+(i*0.07)+'s both'}));
+    if(t.dnf>0) svg.appendChild(svgEl('rect',{x:pad.l+wFin+2,y:y+7,width:String(Math.max(wDNF,0)),height:'18',fill:'#ff5252',rx:'2','opacity':'.8',style:'transform-origin:'+(pad.l+wFin+2)+'px;animation:barGrow 1s '+(i*0.07+0.1)+'s both'}));
+    var tx=pad.l+wFin+(t.dnf>0?wDNF+4:0)+6;
+    svg.appendChild(svgEl('text',{x:tx,y:y+20,'font-family':'JetBrains Mono, monospace','font-size':'10','fill':'rgba(255,255,255,.6)'},t.fin+'F'+(t.dnf>0?' '+t.dnf+'DNF':'')));
+  });
+  var w=el('dnfWrap'); if(w){w.innerHTML='';w.appendChild(svg);}
+}
+
+/* ── POSITION GAIN/LOSS CHART ── */
+function renderPosGainChart(){
+  var driverGain={};
+  Object.keys(state.raceResultsPerRound).forEach(function(rnd){
+    var res=state.raceResultsPerRound[rnd];
+    res.forEach(function(r){
+      var did=(r.Driver&&r.Driver.driverId)||'?';
+      var code=(r.Driver&&r.Driver.code)||'???';
+      var tc=teamColor(r.Constructor&&r.Constructor.constructorId);
+      if(!driverGain[did]) driverGain[did]={code:code,tc:tc,gains:[],isMine:(r.Driver&&(r.Driver.driverId===FAV_DRIVER_ID||r.Driver.permanentNumber===FAV_DRIVER_NUM))};
+      var grid=parseInt(r.grid||r.position||0), race=parseInt(r.position||0);
+      if(grid>0&&race>0) driverGain[did].gains.push(grid-race);
+    });
+  });
+  var drivers=Object.values(driverGain).filter(function(d){return d.gains.length>0;})
+    .map(function(d){d.avg=Math.round(d.gains.reduce(function(a,b){return a+b;},0)/d.gains.length*10)/10;return d;})
+    .sort(function(a,b){return b.avg-a.avg;}).slice(0,10);
+  if(!drivers.length){el('posGainWrap').innerHTML='<div style="padding:20px;color:rgba(255,255,255,.3);font-family:monospace;font-size:10px">No data yet</div>';return;}
+  var W=400,rowH=34,pad={l:50,r:80,t:10,b:10};
+  var H=drivers.length*rowH+pad.t+pad.b;
+  var maxAbs=Math.max(1,Math.max.apply(null,drivers.map(function(d){return Math.abs(d.avg);})));
+  var mid=pad.l+(W-pad.l-pad.r)/2;
+  var svg=svgEl('svg',{viewBox:'0 0 '+W+' '+H});
+  svg.appendChild(svgEl('line',{x1:mid,y1:pad.t,x2:mid,y2:H-pad.b,stroke:'rgba(255,255,255,.15)','stroke-width':'1','stroke-dasharray':'4 4'}));
+  drivers.forEach(function(d,i){
+    var y=pad.t+i*rowH;
+    var halfW=(W-pad.l-pad.r)/2;
+    var barW=halfW*Math.abs(d.avg)/maxAbs;
+    var isGain=d.avg>0;
+    var color=isGain?'#00e676':'#ff5252';
+    var x=isGain?mid:mid-barW;
+    svg.appendChild(svgEl('text',{x:pad.l-4,y:y+20,'text-anchor':'end','font-family':'JetBrains Mono, monospace','font-size':'11','fill':d.isMine?'#FFCC00':'rgba(255,255,255,.7)'},d.code));
+    svg.appendChild(svgEl('rect',{x:x,y:y+8,width:String(Math.max(barW,0)),height:'20',fill:color,rx:'2','opacity':'.85',style:'transform-origin:'+(isGain?x:(x+barW))+'px;animation:barGrow 1s '+(i*0.07)+'s both'}));
+    svg.appendChild(svgEl('text',{x:isGain?mid+barW+5:mid-barW-5,y:y+22,'text-anchor':isGain?'start':'end','font-family':'JetBrains Mono, monospace','font-size':'11','fill':color,'font-weight':'700'},(isGain?'+':'')+d.avg+' pos'));
+  });
+  var w=el('posGainWrap'); if(w){w.innerHTML='';w.appendChild(svg);}
 }
 
 function renderHeatmap(){
-  var completedRounds = Object.keys(state.raceResultsPerRound).map(Number).sort(function(a,b){return a-b;});
-  var top10 = state.driverStandings.slice(0,10);
-  var now = Date.now();
-  var upcoming = state.schedule.filter(function(r){ return new Date(r.date+'T'+(r.time||'14:00:00Z')).getTime()>now; }).slice(0,2);
-  var roundLabels = completedRounds.map(function(rnd){
-    var race=null;
-    for(var i=0;i<state.schedule.length;i++){ if(state.schedule[i].round==rnd){ race=state.schedule[i]; break; } }
+  var completedRounds=Object.keys(state.raceResultsPerRound).map(Number).sort(function(a,b){return a-b;});
+  var top10=state.driverStandings.slice(0,10);
+  var now=Date.now();
+  var upcoming=state.schedule.filter(function(r){return new Date(r.date+'T'+(r.time||'14:00:00Z')).getTime()>now;}).slice(0,2);
+  var roundLabels=completedRounds.map(function(rnd){
+    var race=null;for(var i=0;i<state.schedule.length;i++){if(state.schedule[i].round==rnd){race=state.schedule[i];break;}}
     var loc=(race&&race.Circuit&&race.Circuit.Location&&race.Circuit.Location.locality)||('R'+rnd);
-    return {rnd:rnd, label:loc.substring(0,3).toUpperCase(), flag:circuitFlag(loc)};
+    return{rnd:rnd,label:loc.substring(0,3).toUpperCase(),flag:circuitFlag(loc)};
   }).concat(upcoming.map(function(r){
     var loc=(r.Circuit&&r.Circuit.Location&&r.Circuit.Location.locality)||'TBA';
-    return {rnd:r.round, label:loc.substring(0,3).toUpperCase(), flag:circuitFlag(loc), upcoming:true};
+    return{rnd:r.round,label:loc.substring(0,3).toUpperCase(),flag:circuitFlag(loc),upcoming:true};
   }));
-  var thead = '<thead><tr><th>Driver</th>' + roundLabels.map(function(r){ return '<th>'+r.flag+' '+r.label+'</th>'; }).join('') + '</tr></thead>';
-  var tbody = top10.map(function(ds){
-    var d=ds.Driver, tc=teamColor(ds.Constructors&&ds.Constructors[0]&&ds.Constructors[0].constructorId);
+  var thead='<thead><tr><th>Driver</th>'+roundLabels.map(function(r){return '<th>'+r.flag+' '+r.label+'</th>';}).join('')+'</tr></thead>';
+  var tbody=top10.map(function(ds){
+    var d=ds.Driver,tc=teamColor(ds.Constructors&&ds.Constructors[0]&&ds.Constructors[0].constructorId);
     var isMine=d&&(d.driverId===FAV_DRIVER_ID||d.permanentNumber===FAV_DRIVER_NUM);
-    var cells = roundLabels.map(function(rl){
-      if(rl.upcoming) return '<td><div class="pos-cell p-next">TBA</div></td>';
-      var res=state.raceResultsPerRound[rl.rnd]||[];
-      var dRes=null;
-      for(var i=0;i<res.length;i++){ if(res[i].Driver&&(res[i].Driver.driverId===(d&&d.driverId)||res[i].Driver.permanentNumber===(d&&d.permanentNumber))){ dRes=res[i]; break; } }
-      if(!dRes) return '<td><div class="pos-cell" style="color:rgba(255,255,255,.2)">-</div></td>';
+    var cells=roundLabels.map(function(rl){
+      if(rl.upcoming)return'<td><div class="pos-cell p-next">TBA</div></td>';
+      var res=state.raceResultsPerRound[rl.rnd]||[],dRes=null;
+      for(var i=0;i<res.length;i++){if(res[i].Driver&&(res[i].Driver.driverId===(d&&d.driverId)||res[i].Driver.permanentNumber===(d&&d.permanentNumber))){dRes=res[i];break;}}
+      if(!dRes)return'<td><div class="pos-cell" style="color:rgba(255,255,255,.2)">-</div></td>';
       var pos=parseInt(dRes.position);
-      return '<td><div class="pos-cell p-'+Math.min(pos,10)+'">'+pos+'</div></td>';
+      return'<td><div class="pos-cell p-'+Math.min(pos,10)+'">'+pos+'</div></td>';
     }).join('');
-    return '<tr class="'+(isMine?'my-driver-hm':'')+'"><td><div style="display:flex;align-items:center;gap:8px"><div style="width:3px;height:24px;background:'+tc+';flex-shrink:0"></div><div><div style="font-family:\'Playfair Display\',serif;font-size:12px;color:'+(isMine?'#FFCC00':'#fff')+'">'+(d&&d.givenName&&d.givenName.charAt(0)||'')+'. '+(d&&d.familyName||'')+(isMine?' ★':'')+'</div><div style="font-family:\'JetBrains Mono\',monospace;font-size:8px;color:rgba(255,255,255,.3)">'+(ds.Constructors&&ds.Constructors[0]&&ds.Constructors[0].name||'')+'</div></div></div></td>'+cells+'</tr>';
+    return'<tr class="'+(isMine?'my-driver-hm':'')+'"><td><div style="display:flex;align-items:center;gap:8px"><div style="width:3px;height:24px;background:'+tc+';flex-shrink:0"></div><div><div style="font-family:\'Playfair Display\',serif;font-size:12px;color:'+(isMine?'#FFCC00':'#fff')+'">'+(d&&d.givenName&&d.givenName.charAt(0)||'')+'. '+(d&&d.familyName||'')+(isMine?' ★':'')+'</div><div style="font-family:\'JetBrains Mono\',monospace;font-size:8px;color:rgba(255,255,255,.3)">'+(ds.Constructors&&ds.Constructors[0]&&ds.Constructors[0].name||'')+'</div></div></div></td>'+cells+'</tr>';
   }).join('');
-  var t = document.getElementById('heatmapTable');
-  if(t) t.innerHTML = thead + '<tbody>' + tbody + '</tbody>';
+  var t=el('heatmapTable'); if(t) t.innerHTML=thead+'<tbody>'+tbody+'</tbody>';
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    TAB SWITCHING & REFRESH
-═══════════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function switchTab(name,btn){
-  document.querySelectorAll('.tab-pane').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
-  document.getElementById('tab-'+name).classList.add('active');
+  document.querySelectorAll('.tab-pane').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  el('tab-'+name).classList.add('active');
   btn.classList.add('active');
-  if(name==='analytics' && !analyticsRendered && state.loaded){ analyticsRendered=false; renderAnalytics(); }
+  if(name==='analytics'&&!analyticsRendered&&state.loaded){analyticsRendered=false;renderAnalytics();}
   if(name==='live') renderLiveTab();
 }
 
 async function refreshData(){
-  var btn = document.querySelector('.refresh-btn');
-  if(btn){ btn.textContent='Loading...'; btn.disabled=true; }
-  cdTimers.forEach(function(t){ clearInterval(t); });
-  cdTimers = [];
-  analyticsRendered = false;
-  state.loaded = false;
-  try{ await loadAll(); renderAll(); } catch(e){ console.error(e); renderAll(); }
-  if(btn){ btn.textContent='Refresh'; btn.disabled=false; }
+  var btn=document.querySelector('.refresh-btn');
+  if(btn){btn.textContent='Loading...';btn.disabled=true;}
+  analyticsRendered=false;
+  try{await loadAll();renderAll();}catch(e){console.error(e);renderAll();}
+  if(btn){btn.textContent='Refresh';btn.disabled=false;}
 }
 
 function renderAll(){
@@ -1912,37 +2070,28 @@ function renderAll(){
   renderDriverStandings();
   renderConStandings();
   renderPaddock();
-  renderH2H();
+  renderAllTeamsH2H();
   renderStatsRibbon();
   renderTicker();
   renderLiveTab();
-  var activeTab = document.querySelector('.tab-btn.active');
-  if(activeTab && activeTab.dataset && activeTab.dataset.tab === 'analytics'){ analyticsRendered=false; renderAnalytics(); }
+  var activeTab=document.querySelector('.tab-btn.active');
+  if(activeTab&&activeTab.dataset&&activeTab.dataset.tab==='analytics'){analyticsRendered=false;renderAnalytics();}
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   INIT
-═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   INIT — render immediately, load API in background
+═══════════════════════════════════════════════════════════ */
 (function init(){
-  /* STEP 1: Render immediately with fallback data — page is usable right away */
   renderAll();
-
-  /* STEP 2: Dismiss overlay after a short animation (fallback data already rendered) */
   setTimeout(hideOverlay, 800);
-
-  /* STEP 3: Try to enhance with live API data in background */
   setTimeout(function(){
-    document.getElementById('loadingStatus').textContent = 'Enhancing with live API data...';
-    loadAll()
-      .then(function(){
-        document.getElementById('lastUpdated').textContent = 'API: ' + new Date().toLocaleTimeString();
-        analyticsRendered = false;
-        renderAll();
-      })
-      .catch(function(e){
-        console.warn('API unavailable, using 2026 fallback data:', e);
-        document.getElementById('lastUpdated').textContent = 'Offline mode';
-      });
+    loadAll().then(function(){
+      analyticsRendered=false;
+      renderAll();
+    }).catch(function(e){
+      console.warn('API unavailable, running on 2026 fallback data:', e);
+      el('lastUpdated').textContent='Offline · Fallback data';
+    });
   }, 1200);
 })();
 
